@@ -1,26 +1,85 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-card: var(--bg-card);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-white: var(--white);
+
+  --color-primary: var(--accent);
+  --color-primary-foreground: #ffffff;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --color-input: var(--border);
+  --color-accent-foreground: var(--text-primary);
+  --color-secondary: var(--bg-secondary);
+  --color-secondary-foreground: var(--text-primary);
+  --color-ring: var(--accent);
+
+  --color-muted-foreground: var(--text-secondary);
+  --color-card: var(--bg-card);
+  --color-card-foreground: var(--text-primary);
+  --color-popover: var(--bg-secondary);
+  --color-popover-foreground: var(--text-primary);
+
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-outfit);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root,
+[data-theme="dark"] {
+  --bg-primary: #0a1e42;
+  --bg-secondary: #102a54;
+  --bg-card: #183668;
+  --border: #204a7a;
+  --accent: #3b82f6;
+  --text-primary: #e8eeff;
+  --text-secondary: #94a3d0;
+  --white: #ffffff;
+}
+
+[data-theme="light"] {
+  --bg-primary: #eef3ff;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --border: #cbd5e1;
+  --accent: #2563eb;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --white: #ffffff;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--white);
+}
+
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
 }
