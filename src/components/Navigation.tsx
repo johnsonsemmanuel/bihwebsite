@@ -15,6 +15,7 @@ import {
 import {
   Building,
   ChevronDown,
+  ArrowRight,
   ChevronRight,
   MenuIcon,
   Rocket,
@@ -268,6 +269,7 @@ export default function Navigation() {
     { label: "Impact", href: "/#stats", id: "stats" },
     { label: "FAQ", href: "/#faq", id: "faq" },
     { label: "News", href: "/news", id: "news" },
+    { label: "Events", href: "/events", id: "events" },
     { label: "Contact", href: "/contact", id: "contact" },
   ];
 
@@ -320,7 +322,7 @@ export default function Navigation() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {[{ label: "Impact", href: "/#stats", id: "stats" }, { label: "FAQ", href: "/#faq", id: "faq" }, { label: "News", href: "/news", id: "news" }].map((item) => (
+                {[{ label: "Impact", href: "/#stats", id: "stats" }, { label: "FAQ", href: "/#faq", id: "faq" }, { label: "News", href: "/news", id: "news" }, { label: "Events", href: "/events", id: "events" }].map((item) => (
                   <NavigationMenuItem key={item.id}>
                     <NavigationMenuLink asChild>
                       <Link href={item.href} onClick={handleNavClick(item.href)} className="rounded-full px-3 py-2 text-sm font-medium transition-colors"
@@ -344,7 +346,9 @@ export default function Navigation() {
 
             <ThemeToggle theme={theme} resolved={resolved} onToggle={cycleTheme} />
             <Button asChild size="sm" className="ml-1 rounded-full">
-              <Link href="/contact">Get Started</Link>
+              <Link href="https://bluespacefinancial.cloud/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
+                Bluespace Financial <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </Button>
           </div>
 
