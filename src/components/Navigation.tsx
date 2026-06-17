@@ -263,9 +263,9 @@ export default function Navigation() {
         <div
           className="mx-auto flex max-w-6xl items-center justify-between rounded-full px-4 py-2.5"
           style={{
-            backgroundColor: scrolled ? "var(--bg-secondary)" : "rgba(16,42,84,0.72)",
-            border: scrolled ? "1px solid var(--border)" : "1px solid rgba(255,255,255,0.12)",
-            boxShadow: scrolled ? "0 12px 50px rgba(0,0,0,0.22)" : "0 10px 40px rgba(0,0,0,0.16)",
+            backgroundColor: scrolled ? "var(--bg-secondary)" : "color-mix(in srgb, var(--bg-secondary) 70%, transparent)",
+            border: "1px solid var(--border)",
+            boxShadow: scrolled ? "0 12px 50px rgba(0,0,0,0.12)" : "none",
             backdropFilter: "blur(18px)",
             WebkitBackdropFilter: "blur(18px)",
           }}
@@ -323,9 +323,7 @@ export default function Navigation() {
               </NavigationMenuList>
             </NavigationMenu>
 
-            <Button onClick={() => setTheme(resolved === "dark" ? "light" : "dark")} variant="ghost" size="icon" aria-label="Toggle theme" className="ml-1 rounded-full">
-              {resolved === "dark" ? <Sun className="h-4 w-4" /> : <MoonIcon />}
-            </Button>
+            <ThemeToggle resolved={resolved} onToggle={() => setTheme(resolved === "dark" ? "light" : "dark")} />
             <Button asChild size="sm" className="ml-1 rounded-full">
               <Link href="/contact">Get Started</Link>
             </Button>
@@ -333,10 +331,7 @@ export default function Navigation() {
 
           {/* Mobile controls */}
           <div className="flex items-center gap-1 md:hidden">
-            <button onClick={() => setTheme(resolved === "dark" ? "light" : "dark")} aria-label="Toggle theme"
-              className="flex h-10 w-10 items-center justify-center rounded-full" style={{ color: "var(--text-secondary)" }}>
-              {resolved === "dark" ? <Sun className="h-5 w-5" /> : <MoonIcon />}
-            </button>
+            <ThemeToggle resolved={resolved} onToggle={() => setTheme(resolved === "dark" ? "light" : "dark")} />
             <button onClick={() => setMobileOpen((o) => !o)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen}
               className="flex h-10 w-10 items-center justify-center rounded-full" style={{ color: "var(--text-primary)" }}>
               {mobileOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
@@ -355,8 +350,7 @@ export default function Navigation() {
             exit={{ x: "100%" }}
             transition={{ duration: 0.3, ease: EASE }}
             className="fixed inset-0 z-40 flex flex-col md:hidden"
-            style={{ backgroundColor: "var(--bg-primary)" }}
-          >
+            style={{ backgroundColor: "var(--bg-primary)" }}          >
             {/* Drawer header */}
             <div className="flex shrink-0 items-center justify-between border-b px-5 py-4" style={{ borderColor: "var(--border)" }}>
               <img src="/bih2.png" alt="BlueSPACE" className="h-8 w-auto" />
@@ -413,9 +407,31 @@ export default function Navigation() {
   );
 }
 
-function MoonIcon() {
+function ThemeToggle({ resolved, onToggle }: { resolved: "dark" | "light"; onToggle: () => void }) {
+  const isDark = resolved === "dark";
   return (
-    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+    <button
+      onClick={onToggle}
+      aria-label="Toggle theme"
+      className="relative ml-1 flex h-8 w-[3.25rem] shrink-0 items-center rounded-full border p-1 transition-colors"
+      style={{ backgroundColor: "var(--bg-card)", borderColor: "var(--border)" }}
+    >
+      <motion.span
+        layout
+        animate={{ x: isDark ? 0 : 22 }}
+        transition={{ type: "spring", stiffness: 500, damping: 35 }}
+        className="flex h-6 w-6 items-center justify-center rounded-full text-white"
+        style={{ backgroundColor: "var(--accent)" }}
+      >
+        {isDark ? <MoonIcon className="h-3 w-3" /> : <Sun className="h-3 w-3" />}
+      </motion.span>
+    </button>
+  );
+}
+
+function MoonIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className ?? "h-4 w-4"} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
     </svg>
   );

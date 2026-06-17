@@ -10,16 +10,16 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground shadow-sm shadow-black/5 hover:bg-primary/90 hover:shadow-md hover:shadow-primary/25 active:shadow-sm transition-all duration-200",
+          "bg-primary text-white shadow-sm hover:opacity-90 active:opacity-80 transition-all duration-200",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm shadow-black/5 hover:bg-destructive/90 hover:shadow-md hover:shadow-destructive/25 active:shadow-sm transition-all duration-200",
+          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90 transition-all duration-200",
         outline:
-          "border border-input bg-background shadow-sm shadow-black/5 hover:bg-accent hover:text-accent-foreground hover:border-accent hover:shadow-md active:shadow-sm transition-all duration-200",
+          "border border-input bg-transparent text-foreground shadow-sm hover:bg-accent hover:text-white hover:border-accent transition-all duration-200",
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm shadow-black/5 hover:bg-secondary/80 hover:shadow-md active:shadow-sm transition-all duration-200",
+          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80 transition-all duration-200",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground hover:scale-105 active:scale-95 transition-all duration-200",
-        link: "text-primary underline-offset-4 hover:underline hover:text-accent transition-all duration-200",
+          "hover:bg-accent/10 hover:text-accent transition-all duration-200",
+        link: "text-primary underline-offset-4 hover:underline transition-all duration-200",
       },
       size: {
         default: "h-9 px-4 py-2",

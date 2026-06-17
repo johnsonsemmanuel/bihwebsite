@@ -77,7 +77,7 @@ export default function Testimonials() {
                   borderColor: "var(--border)",
                   backgroundColor: "var(--bg-card)",
                 }}
-                whileHover={{ y: -6, boxShadow: "0 12px 40px rgba(59,130,246,0.12)" }}
+                whileHover={{ y: -6, boxShadow: "0 12px 40px var(--accent-muted)" }}
                 transition={{ duration: 0.3 }}
               >
                 <svg className="mb-6 h-6 w-6" style={{ color: "var(--accent)", opacity: 0.4 }} fill="currentColor" viewBox="0 0 24 24">

@@ -25,7 +25,7 @@ function StatCard({ value, suffix, label, delay }: { value: number; suffix: stri
         borderColor: "var(--border)",
         backgroundColor: "var(--bg-card)",
       }}
-      whileHover={{ y: -4, boxShadow: "0 8px 30px rgba(59, 130, 246, 0.15)" }}
+      whileHover={{ y: -4, boxShadow: "0 8px 30px var(--accent-muted)" }}
     >
       <div className="mb-2 text-3xl font-bold sm:text-4xl" style={{ color: "var(--text-primary)" }}>
         {count}{suffix}
