@@ -8,9 +8,9 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 const STATS = [
-  { value: "120+", label: "Portfolio Companies" },
-  { value: "$480M", label: "Capital Deployed" },
-  { value: "94%", label: "Survival Rate" },
+  { value: "5", label: "Factory Programs" },
+  { value: "120+", label: "Startups Accelerated" },
+  { value: "10K+", label: "Lives Impacted" },
 ];
 
 function smoothScrollTo(id: string) {
@@ -57,7 +57,7 @@ export default function Hero() {
             className="text-xs font-semibold tracking-[0.2em] uppercase"
             style={{ color: "var(--accent)" }}
           >
-            Venture Accelerator
+            BlueSPACE Innovation Hub
           </span>
           <span className="h-px w-8 bg-[#3b82f6] opacity-60" />
         </motion.div>
@@ -70,15 +70,10 @@ export default function Hero() {
           className="mb-6 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           style={{ color: "var(--text-primary)" }}
         >
-          We Back Founders
+          Digital Accelerator
           <br />
-          <span
-            className="relative inline-block"
-            style={{
-              color: "var(--accent)",
-            }}
-          >
-            Others Overlook.
+          <span className="relative inline-block" style={{ color: "var(--accent)" }}>
+            Factory.
           </span>
         </motion.h1>
 
@@ -90,7 +85,7 @@ export default function Hero() {
           className="mx-0 mb-10 max-w-xl text-lg leading-relaxed"
           style={{ color: "var(--text-secondary)" }}
         >
-          Capital, mentorship, and operating infrastructure - everything ambitious founders need to go from zero to Series A.
+          We build, train, and deploy Africa's next generation of founders and talent — through five purpose-built factories designed to take ideas from zero to scale.
         </motion.p>
 
         {/* CTA hierarchy */}
