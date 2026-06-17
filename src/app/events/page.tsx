@@ -14,7 +14,7 @@ function SlideshowHero() {
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % allPhotos.length), 20000);
+    const t = setInterval(() => setIdx((i) => (i + 1) % allPhotos.length), 15000);
     return () => clearInterval(t);
   }, []);
 

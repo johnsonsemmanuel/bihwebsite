@@ -27,33 +27,30 @@ export default function Hero() {
       id="hero"
       className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-20"
     >
-      {/* Background video */}
+      {/* Background: YouTube iframe cropped full-bleed */}
       <motion.div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
         style={{ scale: videoScale, opacity: videoOpacity }}
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80"
-          className="h-full w-full object-cover"
-        >
-          <source src="https://cdn.coverr.co/videos/coverr-abstract-technology-waves-5894/1080p.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0" style={{ backgroundColor: "var(--bg-primary)", opacity: 0.82 }} />
+        <iframe
+          src="https://www.youtube.com/embed/zYyXM1X8jZw?autoplay=1&mute=1&loop=1&playlist=zYyXM1X8jZw&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&start=15"
+          allow="autoplay; encrypted-media"
+          title="Background"
+          className="absolute left-1/2 top-1/2 h-[56.25vw] min-h-full w-full min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2"
+          style={{ border: "none", pointerEvents: "none" }}
+        />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.62)" }} />
       </motion.div>
 
       <Sparkles className="pointer-events-none absolute inset-0 z-10" size={1.5} density={280} speed={0.35} color="#4a8cd4" />
 
-      <div className="relative z-20 mx-auto max-w-4xl text-center">
+      <div className="relative z-20 mx-auto max-w-4xl w-full text-left px-6">
         {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: EASE }}
-          className="mb-6 flex items-center justify-center gap-2"
+          className="mb-6 flex items-center justify-start gap-2"
         >
           <span className="h-px w-8 bg-[#3b82f6] opacity-60" />
           <span
@@ -90,7 +87,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.25, ease: EASE }}
-          className="mx-auto mb-10 max-w-xl text-lg leading-relaxed"
+          className="mx-0 mb-10 max-w-xl text-lg leading-relaxed"
           style={{ color: "var(--text-secondary)" }}
         >
           Capital, mentorship, and operating infrastructure - everything ambitious founders need to go from zero to Series A.
@@ -101,7 +98,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.38, ease: EASE }}
-          className="flex flex-col items-center justify-center gap-3 sm:flex-row"
+          className="flex flex-col items-start justify-start gap-3 sm:flex-row"
         >
           <Button asChild size="lg" className="group rounded-full px-8 text-base">
             <Link href="/contact">
@@ -125,7 +122,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.7 }}
-          className="mt-16 flex items-center justify-center gap-8 sm:gap-12"
+          className="mt-16 flex items-center justify-start gap-8 sm:gap-12"
         >
           {STATS.map((s, i) => (
             <div key={s.label} className="text-center">

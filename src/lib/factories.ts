@@ -1,9 +1,9 @@
-import { Users, Zap, Code, Monitor, DollarSign } from "lucide-react";
+import { Users, Rocket, Code, Monitor, DollarSign } from "lucide-react";
 
-export type IconName = "Users" | "Zap" | "Code" | "Monitor" | "DollarSign";
+export type IconName = "Users" | "Rocket" | "Code" | "Monitor" | "DollarSign";
 
 export const iconMap: Record<IconName, React.ComponentType<{ className?: string }>> = {
-  Users, Zap, Code, Monitor, DollarSign,
+  Users, Rocket, Code, Monitor, DollarSign,
 };
 
 export interface Factory {
@@ -33,7 +33,7 @@ export const factories: Factory[] = [
     ],
     description: "A powerhouse designed to refine and deploy talents where they are needed most. For startups, this means gaining access to a pool of skilled individuals, meticulously trained to meet the specific demands of the industry.",
     body: [
-      "The journey begins with our TalentFACTORY — a powerhouse designed to refine and deploy talent where it is needed most.",
+      "The journey begins with our TalentFACTORY - a powerhouse designed to refine and deploy talent where it is needed most.",
       "For startups, this means gaining access to a pool of skilled individuals, meticulously trained to meet the specific demands of the industry. We bridge the gap between raw potential and industry-ready professionals, ensuring every placement creates immediate value.",
       "Our talent development programmes combine technical training, soft skills development, and real-world project experience, producing graduates who are ready to contribute from day one.",
     ],
@@ -42,7 +42,7 @@ export const factories: Factory[] = [
   },
   {
     id: "accelerator",
-    icon: "Zap",
+    icon: "Rocket",
     title: "AcceleratorFACTORY",
     tag: "Accelerator",
     featured: true,
