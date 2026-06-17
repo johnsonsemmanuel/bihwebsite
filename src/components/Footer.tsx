@@ -74,7 +74,6 @@ export default function Footer() {
                 <div className="flex flex-col gap-2 text-sm">
                   <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/about">About</Link>
                   <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/contact">Contact</Link>
-                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/impact">Impact</Link>
                 </div>
               </div>
               <div className="flex flex-col gap-4">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import PageTransition from "@/components/PageTransition";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -34,7 +35,9 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <PageTransition>{children}</PageTransition>
+        </ThemeProvider>
       </body>
     </html>
   );

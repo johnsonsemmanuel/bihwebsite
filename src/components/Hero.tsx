@@ -140,6 +140,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 1 }}
+        whileTap={{ scale: 0.88 }}
         onClick={() => smoothScrollTo("about")}
       >
         <motion.div

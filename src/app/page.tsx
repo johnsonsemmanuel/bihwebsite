@@ -4,11 +4,10 @@ import Stats from "@/components/Stats";
 import About from "@/components/About";
 import Journey from "@/components/Journey";
 import Programs from "@/components/Programs";
+import PartnersPortfolio from "@/components/PartnersPortfolio";
 import Events from "@/components/Events";
 import News from "@/components/News";
 import Testimonials from "@/components/Testimonials";
-import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
 
 export default function Home() {
   return (
@@ -18,11 +17,10 @@ export default function Home() {
       <About />
       <Journey />
       <Programs />
+      <PartnersPortfolio />
       <Events />
       <News />
       <Testimonials />
-      <FAQ />
-      <Contact />
     </PageShell>
   );
 }

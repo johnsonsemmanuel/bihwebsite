@@ -48,7 +48,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(
           buttonVariants({ variant, size, className }),
-          "active:scale-[0.97]",
+          "active:scale-[0.95] transition-transform duration-100 ease-in-out",
         )}
         ref={ref}
         {...props}

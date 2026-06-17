@@ -1,15 +1,15 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { BookOpen, Clock } from "lucide-react";
+import Link from "next/link";
 
 interface GlassBlogCardProps {
   title?: string;
   excerpt?: string;
   image?: string;
-  author?: {
-    name: string;
-    avatar: string;
-  };
+  author?: { name: string; avatar: string };
   date?: string;
   readTime?: string;
   tags?: string[];
@@ -17,33 +17,102 @@ interface GlassBlogCardProps {
   className?: string;
 }
 
-const defaultPost = {
-  title: "The Future of UI Design",
-  excerpt:
-    "Exploring the latest trends in glassmorphism, 3D elements, and micro-interactions.",
-  image:
-    "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
-  author: {
-    name: "Moumen Soliman",
-    avatar: "https://github.com/shadcn.png",
-  },
-  date: "Dec 2, 2025",
-  readTime: "5 min read",
-  tags: ["Design", "UI/UX"],
-};
-
 export function GlassBlogCard({
-  title = defaultPost.title,
-  excerpt = defaultPost.excerpt,
-  image = defaultPost.image,
-  author = defaultPost.author,
-  date = defaultPost.date,
-  readTime = defaultPost.readTime,
-  tags = defaultPost.tags,
+  title = "The Future of UI Design",
+  excerpt = "Exploring the latest trends in glassmorphism, 3D elements, and micro-interactions.",
+  image = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80",
+  author = { name: "BlueSPACE", avatar: "" },
+  date = "Dec 2, 2025",
+  readTime = "5 min read",
+  tags = ["Design", "UI/UX"],
   href,
   className,
 }: GlassBlogCardProps) {
-  const Wrapper = href ? "a" : "div";
+  const Inner = (
+    <div
+      className="group relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-500 hover:shadow-xl hover:-translate-y-1"
+      style={{
+        borderColor: "var(--border)",
+        backgroundColor: "color-mix(in srgb, var(--bg-card) 70%, transparent)",
+        backdropFilter: "blur(12px)",
+      }}
+    >
+      <div className="relative aspect-[16/9] overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+        />
+        <div
+          className="absolute inset-0 transition-opacity duration-500"
+          style={{ backgroundColor: "rgba(10,18,42,0.5)", opacity: 0.6 }}
+        />
+
+        <div className="absolute bottom-3 left-3 flex gap-2">
+          {tags?.map((tag, i) => (
+            <span
+              key={i}
+              className="rounded-full px-2.5 py-0.5 text-[11px] font-medium backdrop-blur-sm"
+              style={{
+                backgroundColor: "color-mix(in srgb, var(--bg-card) 80%, transparent)",
+                color: "var(--text-secondary)",
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div
+          className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100"
+          style={{
+            backgroundColor: "color-mix(in srgb, var(--bg-primary) 40%, transparent)",
+            backdropFilter: "blur(3px)",
+          }}
+        >
+          <span className="flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium text-white shadow-lg transition-transform duration-300 group-hover:scale-105"
+            style={{ backgroundColor: "var(--accent)" }}>
+            <BookOpen className="h-4 w-4" />
+            Read Article
+          </span>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-4 p-5">
+        <div className="space-y-2">
+          <h3
+            className="text-xl font-semibold leading-tight tracking-tight transition-colors duration-300 group-hover:text-[var(--accent)]"
+            style={{ color: "var(--text-primary)" }}
+          >
+            {title}
+          </h3>
+          <p className="line-clamp-2 text-sm" style={{ color: "var(--text-secondary)" }}>
+            {excerpt}
+          </p>
+        </div>
+
+        <div className="flex items-center justify-between border-t pt-4" style={{ borderColor: "var(--border)" }}>
+          <div className="flex items-center gap-2">
+            <div
+              className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full text-xs font-medium"
+              style={{ border: "1px solid var(--border)", color: "var(--text-primary)" }}
+            >
+              {author.name[0]}
+            </div>
+            <div className="flex flex-col text-xs">
+              <span style={{ color: "var(--text-primary)" }}>{author.name}</span>
+              <span style={{ color: "var(--text-secondary)" }}>{date}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-1 text-xs" style={{ color: "var(--text-secondary)" }}>
+            <Clock className="h-3 w-3" />
+            <span>{readTime}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -51,108 +120,7 @@ export function GlassBlogCard({
       transition={{ duration: 0.4 }}
       className={cn("w-full max-w-[400px]", className)}
     >
-      <Wrapper
-        {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
-        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl"
-        style={{
-          borderColor: "var(--border)",
-          backgroundColor: "color-mix(in srgb, var(--bg-card) 70%, transparent)",
-          backdropFilter: "blur(12px)",
-        }}
-      >
-        <div className="relative aspect-[16/9] overflow-hidden">
-          <motion.img
-            src={image}
-            alt={title}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div
-            className="absolute inset-0 transition-opacity duration-300"
-            style={{ backgroundColor: "rgba(10,18,42,0.5)", opacity: 0.6 }}
-          />
-
-          <div className="absolute bottom-3 left-3 flex gap-2">
-            {tags?.map((tag, index) => (
-              <span
-                key={index}
-                className="rounded-full px-2.5 py-0.5 text-[11px] font-medium backdrop-blur-sm"
-                style={{
-                  backgroundColor: "color-mix(in srgb, var(--bg-card) 80%, transparent)",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <div
-            className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style={{
-              backgroundColor: "color-mix(in srgb, var(--bg-primary) 40%, transparent)",
-              backdropFilter: "blur(2px)",
-            }}
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium text-white shadow-lg"
-              style={{ backgroundColor: "var(--accent)" }}
-            >
-              <BookOpen className="h-4 w-4" />
-              Read Article
-            </motion.button>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-4 p-5">
-          <div className="space-y-2">
-            <h3
-              className="text-xl font-semibold leading-tight tracking-tight transition-colors group-hover:text-[var(--accent)]"
-              style={{ color: "var(--text-primary)" }}
-            >
-              {title}
-            </h3>
-            <p
-              className="line-clamp-2 text-sm"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              {excerpt}
-            </p>
-          </div>
-
-          <div
-            className="flex items-center justify-between border-t pt-4"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <div className="flex items-center gap-2">
-              <div
-                className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full text-xs font-medium"
-                style={{
-                  border: "1px solid var(--border)",
-                  color: "var(--text-primary)",
-                }}
-              >
-                {author.name[0]}
-              </div>
-              <div className="flex flex-col text-xs">
-                <span style={{ color: "var(--text-primary)" }}>
-                  {author.name}
-                </span>
-                <span style={{ color: "var(--text-secondary)" }}>{date}</span>
-              </div>
-            </div>
-
-            <div
-              className="flex items-center gap-1 text-xs"
-              style={{ color: "var(--text-secondary)" }}
-            >
-              <Clock className="h-3 w-3" />
-              <span>{readTime}</span>
-            </div>
-          </div>
-        </div>
-      </Wrapper>
+      {href ? <Link href={href} className="block h-full">{Inner}</Link> : Inner}
     </motion.div>
   );
 }

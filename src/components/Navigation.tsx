@@ -83,13 +83,6 @@ const about: MenuItem[] = [
     img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80",
   },
   {
-    title: "Impact",
-    href: "/impact",
-    description: "Our results and track record.",
-    icon: <TrendingUp className="h-3 w-3 text-[var(--accent)]" />,
-    img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80",
-  },
-  {
     title: "News",
     href: "/news",
     description: "Stories and milestones from the ecosystem.",
@@ -273,10 +266,9 @@ export default function Navigation() {
   const pathActive = (href: string) => pathname === href;
 
   const mobileLinks = [
-    { label: "Impact", href: "/impact", id: "impact" },
     { label: "FAQ", href: "/faq", id: "faq" },
-    { label: "News", href: "/news", id: "news" },
-    { label: "Events", href: "/events", id: "events" },
+    { label: "Impact Report", href: "/impact-report", id: "impact-report" },
+    { label: "FAQ", href: "/faq", id: "faq" },
     { label: "Contact", href: "/contact", id: "contact" },
   ];
 
@@ -323,7 +315,7 @@ export default function Navigation() {
 
                 <NavigationMenuItem>
                   <NavigationMenuTrigger
-                    style={{ color: pathActive("/about") || pathActive("/impact") || pathActive("/news") || pathActive("/events") ? "var(--white)" : "var(--text-secondary)" }}
+                    style={{ color: pathActive("/about") || pathActive("/news") || pathActive("/events") ? "var(--white)" : "var(--text-secondary)" }}
                     onClick={() => navigateTo("/about")}
                   >
                     About
@@ -335,7 +327,7 @@ export default function Navigation() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {[{ label: "FAQ", href: "/faq", id: "faq" }, { label: "News", href: "/news", id: "news" }, { label: "Events", href: "/events", id: "events" }, { label: "Contact", href: "/contact", id: "contact" }].map((item) => (
+                {[{ label: "Impact Report", href: "/impact-report", id: "impact-report" }, { label: "FAQ", href: "/faq", id: "faq" }, { label: "Contact", href: "/contact", id: "contact" }].map((item) => (
                   <NavigationMenuItem key={item.id}>
                     <NavigationMenuLink asChild>
                       <Link href={item.href} onClick={handleNavClick(item.href)} className="rounded-full px-3 py-2 text-sm font-medium transition-colors"
