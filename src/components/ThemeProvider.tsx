@@ -20,27 +20,37 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<Theme>("system");
   const [resolved, setResolved] = useState<"dark" | "light">("dark");
 
+  // Load stored preference (if user explicitly chose one)
   useEffect(() => {
     const stored = localStorage.getItem("bluespace-theme") as Theme | null;
-    if (stored) setThemeState(stored);
+    if (stored === "dark" || stored === "light" || stored === "system") {
+      setThemeState(stored);
+    }
   }, []);
 
+  // React to theme changes AND OS-level changes
   useEffect(() => {
-    const media = window.matchMedia("(prefers-color-scheme: light)");
-    const updateResolved = () => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const apply = () => {
       const r: "dark" | "light" =
-        theme === "system" ? (media.matches ? "light" : "dark") : theme;
+        theme === "system" ? (media.matches ? "dark" : "light") : theme;
       setResolved(r);
       document.documentElement.setAttribute("data-theme", r);
     };
-    updateResolved();
-    media.addEventListener("change", updateResolved);
-    return () => media.removeEventListener("change", updateResolved);
+
+    apply();
+    media.addEventListener("change", apply);
+    return () => media.removeEventListener("change", apply);
   }, [theme]);
 
   const setTheme = (t: Theme) => {
     setThemeState(t);
-    localStorage.setItem("bluespace-theme", t);
+    if (t === "system") {
+      localStorage.removeItem("bluespace-theme");
+    } else {
+      localStorage.setItem("bluespace-theme", t);
+    }
   };
 
   return (

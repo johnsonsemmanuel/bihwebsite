@@ -40,21 +40,21 @@ const programs: MenuItem[] = [
     title: "Pre-Seed Track",
     href: "/programs",
     description: "12-week intensive for pre-product founders",
-    icon: <Rocket className="h-3 w-3 text-[#60a5fa]" />,
+    icon: <Rocket className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80",
   },
   {
     title: "Seed Accelerator",
     href: "/programs",
     description: "$150K investment + operational support",
-    icon: <Building className="h-3 w-3 text-[#60a5fa]" />,
+    icon: <Building className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80",
   },
   {
     title: "Scale Program",
     href: "/programs",
     description: "Series A readiness & expansion",
-    icon: <TrendingUp className="h-3 w-3 text-[#60a5fa]" />,
+    icon: <TrendingUp className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1553729459-afe8f2e2e5b4?w=400&q=80",
   },
 ];
@@ -64,21 +64,21 @@ const about: MenuItem[] = [
     title: "Our Mission",
     href: "/about",
     description: "More than capital. A launch system.",
-    icon: <Users className="h-3 w-3 text-[#60a5fa]" />,
+    icon: <Users className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80",
   },
   {
     title: "Impact",
     href: "/impact",
     description: "Our results speak for themselves",
-    icon: <TrendingUp className="h-3 w-3 text-[#60a5fa]" />,
+    icon: <TrendingUp className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80",
   },
   {
     title: "Founder Stories",
     href: "/#testimonials",
     description: "Trusted by ambitious builders",
-    icon: <Users className="h-3 w-3 text-[#60a5fa]" />,
+    icon: <Users className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1553729459-afe8f2e2e5b4?w=400&q=80",
   },
 ];
@@ -179,7 +179,11 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const { scrollY } = useScroll();
-  const { resolved, setTheme } = useTheme();
+  const { theme, resolved, setTheme } = useTheme();
+  const cycleTheme = () => {
+    const next = theme === "system" ? "dark" : theme === "dark" ? "light" : "system";
+    setTheme(next);
+  };
   const router = useRouter();
   const pathname = usePathname();
 
@@ -323,7 +327,7 @@ export default function Navigation() {
               </NavigationMenuList>
             </NavigationMenu>
 
-            <ThemeToggle resolved={resolved} onToggle={() => setTheme(resolved === "dark" ? "light" : "dark")} />
+            <ThemeToggle theme={theme} resolved={resolved} onToggle={cycleTheme} />
             <Button asChild size="sm" className="ml-1 rounded-full">
               <Link href="/contact">Get Started</Link>
             </Button>
@@ -331,7 +335,7 @@ export default function Navigation() {
 
           {/* Mobile controls */}
           <div className="flex items-center gap-1 md:hidden">
-            <ThemeToggle resolved={resolved} onToggle={() => setTheme(resolved === "dark" ? "light" : "dark")} />
+            <ThemeToggle theme={theme} resolved={resolved} onToggle={cycleTheme} />
             <button onClick={() => setMobileOpen((o) => !o)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen}
               className="flex h-10 w-10 items-center justify-center rounded-full" style={{ color: "var(--text-primary)" }}>
               {mobileOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
@@ -388,12 +392,12 @@ export default function Navigation() {
                 <Link href="/contact" onClick={() => setMobileOpen(false)}>Apply Now</Link>
               </Button>
               <div className="flex items-center justify-center gap-6">
-                <a href="#" aria-label="LinkedIn" className="transition-colors hover:text-[#60a5fa]" style={{ color: "var(--text-secondary)" }}>
+                <a href="#" aria-label="LinkedIn" className="transition-colors hover:text-[var(--accent)]" style={{ color: "var(--text-secondary)" }}>
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                   </svg>
                 </a>
-                <a href="#" aria-label="X / Twitter" className="transition-colors hover:text-[#60a5fa]" style={{ color: "var(--text-secondary)" }}>
+                <a href="#" aria-label="X / Twitter" className="transition-colors hover:text-[var(--accent)]" style={{ color: "var(--text-secondary)" }}>
                   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                   </svg>
@@ -407,25 +411,32 @@ export default function Navigation() {
   );
 }
 
-function ThemeToggle({ resolved, onToggle }: { resolved: "dark" | "light"; onToggle: () => void }) {
+function ThemeToggle({ theme, resolved, onToggle }: { theme: string; resolved: "dark" | "light"; onToggle: () => void }) {
   const isDark = resolved === "dark";
+  const isSystem = theme === "system";
   return (
     <button
       onClick={onToggle}
-      aria-label="Toggle theme"
-      className="relative ml-1 flex h-8 w-[3.25rem] shrink-0 items-center rounded-full border p-1 transition-colors"
-      style={{ backgroundColor: "var(--bg-card)", borderColor: "var(--border)" }}
+      aria-label={`Theme: ${theme}. Click to cycle.`}
+      title={`Current: ${theme}`}
+      className="ml-1 flex h-8 w-8 items-center justify-center rounded-full border transition-colors"
+      style={{
+        backgroundColor: "var(--bg-card)",
+        borderColor: "var(--border)",
+        color: isSystem ? "var(--text-secondary)" : "var(--accent)",
+      }}
     >
-      <motion.span
-        layout
-        animate={{ x: isDark ? 0 : 22 }}
-        transition={{ type: "spring", stiffness: 500, damping: 35 }}
-        className="flex h-6 w-6 items-center justify-center rounded-full text-white"
-        style={{ backgroundColor: "var(--accent)" }}
-      >
-        {isDark ? <MoonIcon className="h-3 w-3" /> : <Sun className="h-3 w-3" />}
-      </motion.span>
+      {isSystem ? <MonitorIcon className="h-4 w-4" /> : isDark ? <MoonIcon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
     </button>
+  );
+}
+
+function MonitorIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className ?? "h-4 w-4"} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 17H5a2 2 0 00-2 2h14a2 2 0 00-2-2h-4m0 0V3m0 14H9m0 0V3m6 0H9" />
+      <rect x="2" y="3" width="20" height="13" rx="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 

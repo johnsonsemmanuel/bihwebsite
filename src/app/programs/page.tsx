@@ -87,7 +87,7 @@ function TrackCard({ track, index }: { track: typeof tracks[number]; index: numb
             <div className="mb-4 flex items-center gap-3">
               <span
                 className="rounded-full border px-3 py-1 text-xs font-medium"
-                style={{ borderColor: "var(--accent)", color: "#60a5fa" }}
+                style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
               >
                 {track.tag}
               </span>
@@ -100,7 +100,7 @@ function TrackCard({ track, index }: { track: typeof tracks[number]; index: numb
             </div>
 
             <h2
-              className="mb-3 text-2xl font-bold transition-colors group-hover:text-[#60a5fa]"
+              className="mb-3 text-2xl font-bold transition-colors group-hover:text-[var(--accent)]"
               style={{ color: "var(--text-primary)" }}
             >
               {track.title}
@@ -120,7 +120,7 @@ function TrackCard({ track, index }: { track: typeof tracks[number]; index: numb
                   className="flex items-center gap-2 text-sm"
                   style={{ color: "var(--text-secondary)" }}
                 >
-                  <Check className="h-4 w-4 shrink-0 text-[#60a5fa]" />
+                  <Check className="h-4 w-4 shrink-0 text-[var(--accent)]" />
                   {f}
                 </div>
               ))}

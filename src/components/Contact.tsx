@@ -52,7 +52,7 @@ function InputField({ label, id, type, placeholder, isTextarea }: {
         id={id}
         type={isTextarea ? undefined : type}
         rows={isTextarea ? 4 : undefined}
-        className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-[#60a5fa] focus:ring-1 focus:ring-[#60a5fa]/30"
+        className="w-full rounded-xl border px-4 py-3 text-sm outline-none transition-all duration-200 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]/30"
         style={{
           borderColor: "var(--border)",
           backgroundColor: "var(--bg-primary)",
@@ -108,7 +108,7 @@ export default function Contact({ hideHeading }: { hideHeading?: boolean }) {
                       {info.label}
                     </div>
                     {info.href ? (
-                      <a href={info.href} className="text-sm font-semibold transition-colors hover:text-[#60a5fa] whitespace-pre-line" style={{ color: "var(--text-primary)" }}>
+                      <a href={info.href} className="text-sm font-semibold transition-colors hover:text-[var(--accent)] whitespace-pre-line" style={{ color: "var(--text-primary)" }}>
                         {info.value}
                       </a>
                     ) : (

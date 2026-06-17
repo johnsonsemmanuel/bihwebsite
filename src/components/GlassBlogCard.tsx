@@ -104,7 +104,7 @@ export function GlassBlogCard({
         <div className="flex flex-col gap-4 p-5">
           <div className="space-y-2">
             <h3
-              className="text-xl font-semibold leading-tight tracking-tight transition-colors group-hover:text-[#60a5fa]"
+              className="text-xl font-semibold leading-tight tracking-tight transition-colors group-hover:text-[var(--accent)]"
               style={{ color: "var(--text-primary)" }}
             >
               {title}

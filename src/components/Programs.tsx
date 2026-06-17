@@ -45,7 +45,7 @@ const tracks = [
     ideal: "Pre-product, 1–2 founders",
     outcomes: ["MVP validated in market", "First 10 paying customers", "Pitch-ready for seed round"],
     proof: "82% of graduates close a seed round within 6 months.",
-    color: "#60a5fa",
+    color: "var(--accent)",
   },
   {
     id: "seed",
