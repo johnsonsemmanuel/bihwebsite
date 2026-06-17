@@ -41,8 +41,8 @@ const tracks = [
     stage: "Idea → MVP",
     title: "Pre-Seed Track",
     tagline: "12-week intensive",
-    investment: "$25K — $75K",
-    ideal: "Pre-product, 1–2 founders",
+    investment: "$25K - $75K",
+    ideal: "Pre-product, 1-2 founders",
     outcomes: ["MVP validated in market", "First 10 paying customers", "Pitch-ready for seed round"],
     proof: "82% of graduates close a seed round within 6 months.",
     color: "var(--accent)",
@@ -169,7 +169,7 @@ export default function Programs() {
         {/* Bottom CTA */}
         <AnimatedSection className="mt-12 text-center" delay={0.1}>
           <p className="mb-4 text-sm" style={{ color: "var(--text-secondary)" }}>
-            Not sure which track fits? We'll help you figure it out — no pressure.
+            Not sure which track fits? We'll help you figure it out - no pressure.
           </p>
           <Button asChild size="lg" className="rounded-full">
             <Link href="/contact">Talk to Our Team</Link>

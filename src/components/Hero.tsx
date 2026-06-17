@@ -93,7 +93,7 @@ export default function Hero() {
           className="mx-auto mb-10 max-w-xl text-lg leading-relaxed"
           style={{ color: "var(--text-secondary)" }}
         >
-          Capital, mentorship, and operating infrastructure — everything ambitious founders need to go from zero to Series A.
+          Capital, mentorship, and operating infrastructure - everything ambitious founders need to go from zero to Series A.
         </motion.p>
 
         {/* CTA hierarchy */}

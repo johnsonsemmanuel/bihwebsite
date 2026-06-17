@@ -24,7 +24,7 @@ const contactInfo = [
     ),
     label: "Schedule your visit",
     value: "One Airport Square, 8th Floor\nAirport City, Accra, Ghana",
-    subvalue: "Mon – Fri · 8am to 6pm GMT",
+    subvalue: "Mon - Fri · 8am to 6pm GMT",
     href: "https://maps.google.com/?q=One+Airport+Square+Accra+Ghana",
   },
   {

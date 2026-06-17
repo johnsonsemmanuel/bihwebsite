@@ -344,7 +344,7 @@ export default function Navigation() {
         </div>
       </motion.nav>
 
-      {/* Mobile drawer — full-screen, scrollable */}
+      {/* Mobile drawer - full-screen, scrollable */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
