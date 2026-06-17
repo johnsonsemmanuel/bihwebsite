@@ -76,25 +76,32 @@ const programs: MenuItem[] = [
 
 const about: MenuItem[] = [
   {
-    title: "Our Mission",
+    title: "Our Story",
     href: "/about",
-    description: "More than capital. A launch system.",
+    description: "Vision, mission, and the team behind the hub.",
     icon: <Users className="h-3 w-3 text-[var(--accent)]" />,
-    img: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80",
+    img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80",
   },
   {
     title: "Impact",
     href: "/impact",
-    description: "Our results speak for themselves",
+    description: "Our results and track record.",
     icon: <TrendingUp className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80",
   },
   {
-    title: "Founder Stories",
-    href: "/#testimonials",
-    description: "Trusted by ambitious builders",
+    title: "News",
+    href: "/news",
+    description: "Stories and milestones from the ecosystem.",
     icon: <Users className="h-3 w-3 text-[var(--accent)]" />,
-    img: "https://images.unsplash.com/photo-1553729459-afe8f2e2e5b4?w=400&q=80",
+    img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80",
+  },
+  {
+    title: "Events",
+    href: "/events",
+    description: "Moments and memories from the hub.",
+    icon: <Users className="h-3 w-3 text-[var(--accent)]" />,
+    img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&q=80",
   },
 ];
 
@@ -266,8 +273,8 @@ export default function Navigation() {
   const pathActive = (href: string) => pathname === href;
 
   const mobileLinks = [
-    { label: "Impact", href: "/#stats", id: "stats" },
-    { label: "FAQ", href: "/#faq", id: "faq" },
+    { label: "Impact", href: "/impact", id: "impact" },
+    { label: "FAQ", href: "/faq", id: "faq" },
     { label: "News", href: "/news", id: "news" },
     { label: "Events", href: "/events", id: "events" },
     { label: "Contact", href: "/contact", id: "contact" },
@@ -301,7 +308,10 @@ export default function Navigation() {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger style={{ color: sectionActive("programs") || pathActive("/programs") ? "var(--white)" : "var(--text-secondary)" }}>
+                  <NavigationMenuTrigger
+                    style={{ color: pathActive("/programs") ? "var(--white)" : "var(--text-secondary)" }}
+                    onClick={() => navigateTo("/programs")}
+                  >
                     Programs
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="rounded-3xl p-4">
@@ -312,35 +322,29 @@ export default function Navigation() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger style={{ color: sectionActive("about") || pathActive("/about") ? "var(--white)" : "var(--text-secondary)" }}>
+                  <NavigationMenuTrigger
+                    style={{ color: pathActive("/about") || pathActive("/impact") || pathActive("/news") || pathActive("/events") ? "var(--white)" : "var(--text-secondary)" }}
+                    onClick={() => navigateTo("/about")}
+                  >
                     About
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="rounded-3xl p-4">
-                    <ul className="grid w-[320px] gap-2">
+                    <ul className="grid w-[320px] gap-2 md:grid-cols-2 md:w-[480px]">
                       {about.map((a) => <li key={a.title}><MenuCard item={a} onClick={navigateTo} /></li>)}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {[{ label: "Impact", href: "/#stats", id: "stats" }, { label: "FAQ", href: "/#faq", id: "faq" }, { label: "News", href: "/news", id: "news" }, { label: "Events", href: "/events", id: "events" }].map((item) => (
+                {[{ label: "FAQ", href: "/faq", id: "faq" }, { label: "News", href: "/news", id: "news" }, { label: "Events", href: "/events", id: "events" }, { label: "Contact", href: "/contact", id: "contact" }].map((item) => (
                   <NavigationMenuItem key={item.id}>
                     <NavigationMenuLink asChild>
                       <Link href={item.href} onClick={handleNavClick(item.href)} className="rounded-full px-3 py-2 text-sm font-medium transition-colors"
-                        style={{ backgroundColor: sectionActive(item.id) ? "var(--accent)" : "transparent", color: sectionActive(item.id) ? "var(--white)" : "var(--text-secondary)" }}>
+                        style={{ backgroundColor: pathActive(item.href) ? "var(--accent)" : "transparent", color: pathActive(item.href) ? "var(--white)" : "var(--text-secondary)" }}>
                         {item.label}
                       </Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}
-
-                <NavigationMenuItem>
-                  <NavigationMenuLink asChild>
-                    <Link href="/contact" onClick={handleNavClick("/contact")} className="rounded-full px-3 py-2 text-sm font-medium transition-colors"
-                      style={{ backgroundColor: pathActive("/contact") ? "var(--accent)" : "transparent", color: pathActive("/contact") ? "var(--white)" : "var(--text-secondary)" }}>
-                      Contact
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
 
