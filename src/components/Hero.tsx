@@ -1,6 +1,10 @@
 "use client";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare global { interface Window { YT: any; onYouTubeIframeAPIReady: () => void; } }
+
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { Sparkles } from "./Sparkles";
 import { Button } from "./ui/button";
 import { EASE } from "@/lib/utils";
@@ -21,6 +25,36 @@ export default function Hero() {
   const { scrollYProgress } = useScroll();
   const videoScale = useTransform(scrollYProgress, [0, 0.6], [1, 1.15]);
   const videoOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.3]);
+  const playerRef = useRef<YT.Player | null>(null);
+
+  useEffect(() => {
+    // Load YouTube IFrame API
+    if (!window.YT) {
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+    }
+
+    window.onYouTubeIframeAPIReady = () => {
+      playerRef.current = new window.YT.Player("yt-bg", {
+        events: {
+          onReady: (e: YT.PlayerEvent) => e.target.playVideo(),
+        },
+      });
+    };
+
+    // Poll every second, seek back to start=15 at 75s (15 start + 60s)
+    const interval = setInterval(() => {
+      const p = playerRef.current;
+      if (p && typeof p.getCurrentTime === "function") {
+        if (p.getCurrentTime() >= 75) {
+          p.seekTo(15, true);
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section
@@ -33,7 +67,8 @@ export default function Hero() {
         style={{ scale: videoScale, opacity: videoOpacity }}
       >
         <iframe
-          src="https://www.youtube.com/embed/zYyXM1X8jZw?autoplay=1&mute=1&loop=1&playlist=zYyXM1X8jZw&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&start=15"
+          id="yt-bg"
+          src="https://www.youtube.com/embed/zYyXM1X8jZw?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&start=15&enablejsapi=1"
           allow="autoplay; encrypted-media"
           title="Background"
           className="absolute left-1/2 top-1/2 h-[56.25vw] min-h-full w-full min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2"
@@ -57,7 +92,7 @@ export default function Hero() {
             className="text-xs font-semibold tracking-[0.2em] uppercase"
             style={{ color: "var(--accent)" }}
           >
-            BlueSPACE Innovation Hub
+            Accra · Ghana
           </span>
           <span className="h-px w-8 bg-[#3b82f6] opacity-60" />
         </motion.div>
@@ -67,7 +102,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.12, ease: EASE }}
-          className="mb-6 text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+          className="mb-6 text-5xl font-bold leading-[1.08] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
           style={{ color: "var(--text-primary)" }}
         >
           Digital Accelerator
@@ -85,7 +120,7 @@ export default function Hero() {
           className="mx-0 mb-10 max-w-xl text-lg leading-relaxed"
           style={{ color: "var(--text-secondary)" }}
         >
-          We build, train, and deploy Africa's next generation of founders and talent — through five purpose-built factories designed to take ideas from zero to scale.
+          We build, train, and deploy Africa's next generation of founders and talent, through five purpose-built factories designed to take ideas from zero to scale.
         </motion.p>
 
         {/* CTA hierarchy */}

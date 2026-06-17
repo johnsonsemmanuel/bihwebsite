@@ -68,7 +68,7 @@ This partnership marks a new chapter in bridging academia and industry to drive 
     slug: "innovation-as-a-service-factories",
     title: "Delivering Innovation As A Service through our Factories",
     excerpt: "Explore how BlueSPACE's five-factory model delivers Innovation as a Service to startups and enterprises across Africa.",
-    body: `BlueSPACE's five-factory model — TalentFACTORY, AcceleratorFACTORY, CodeFACTORY, DigitalFACTORY, and CapitalFACTORY — delivers Innovation as a Service to startups and enterprises across Africa.
+    body: `BlueSPACE's five-factory model, TalentFACTORY, AcceleratorFACTORY, CodeFACTORY, DigitalFACTORY, and CapitalFACTORY, delivers Innovation as a Service to startups and enterprises across Africa.
 
 Each factory is purpose-built to address a specific gap in the startup journey: talent acquisition, acceleration, technical co-creation, digital upskilling, and capital access.
 
