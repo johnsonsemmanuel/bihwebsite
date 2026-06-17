@@ -38,35 +38,35 @@ type MenuItem = {
 const programs: MenuItem[] = [
   {
     title: "TalentFACTORY",
-    href: "/programs",
+    href: "/programs/talent",
     description: "Refine & deploy skilled talent to startups",
     icon: <Users className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&q=80",
   },
   {
     title: "AcceleratorFACTORY",
-    href: "/programs",
+    href: "/programs/accelerator",
     description: "Mentorship, BIX exchange & global growth",
     icon: <Rocket className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80",
   },
   {
     title: "CodeFACTORY",
-    href: "/programs",
+    href: "/programs/code",
     description: "Tech co-creation for non-tech founders",
     icon: <Building className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&q=80",
   },
   {
     title: "DigitalFACTORY",
-    href: "/programs",
+    href: "/programs/digital",
     description: "Digital skills for continuous growth",
     icon: <TrendingUp className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&q=80",
   },
   {
     title: "CapitalFACTORY",
-    href: "/programs",
+    href: "/programs/capital",
     description: "Investor access, grants & funding support",
     icon: <TrendingUp className="h-3 w-3 text-[var(--accent)]" />,
     img: "https://images.unsplash.com/photo-1553729459-afe8f2e2e5b4?w=400&q=80",
@@ -267,6 +267,7 @@ export default function Navigation() {
   const mobileLinks = [
     { label: "Impact", href: "/#stats", id: "stats" },
     { label: "FAQ", href: "/#faq", id: "faq" },
+    { label: "News", href: "/news", id: "news" },
     { label: "Contact", href: "/contact", id: "contact" },
   ];
 
@@ -319,7 +320,7 @@ export default function Navigation() {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {[{ label: "Impact", href: "/#stats", id: "stats" }, { label: "FAQ", href: "/#faq", id: "faq" }].map((item) => (
+                {[{ label: "Impact", href: "/#stats", id: "stats" }, { label: "FAQ", href: "/#faq", id: "faq" }, { label: "News", href: "/news", id: "news" }].map((item) => (
                   <NavigationMenuItem key={item.id}>
                     <NavigationMenuLink asChild>
                       <Link href={item.href} onClick={handleNavClick(item.href)} className="rounded-full px-3 py-2 text-sm font-medium transition-colors"

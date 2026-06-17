@@ -13,16 +13,21 @@ interface PageHeroProps {
 export default function PageHero({ title, subtitle, image, children }: PageHeroProps) {
   const { scrollYProgress } = useScroll();
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.15]);
-  const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.3]);
 
   return (
     <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden sm:min-h-[60vh]">
-      <motion.div className="pointer-events-none absolute inset-0" style={{ scale, opacity }}>
+      <motion.div className="pointer-events-none absolute inset-0" style={{ scale }}>
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${image})` }}
         />
-        <div className="absolute inset-0" style={{ backgroundColor: "var(--bg-primary)", opacity: 0.7 }} />
+        {/* dark tint so text is readable */}
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.55)" }} />
+        {/* bottom fade into page background */}
+        <div
+          className="absolute inset-x-0 bottom-0 h-40"
+          style={{ background: "linear-gradient(to bottom, transparent, var(--bg-primary))" }}
+        />
       </motion.div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-24 text-center">
@@ -33,14 +38,14 @@ export default function PageHero({ title, subtitle, image, children }: PageHeroP
         >
           <h1
             className="mb-4 text-4xl font-bold leading-tight tracking-tight sm:text-5xl md:text-6xl"
-            style={{ color: "var(--text-primary)" }}
+            style={{ color: "#ffffff" }}
           >
             {title}
           </h1>
           {subtitle && (
             <p
               className="mx-auto max-w-2xl text-lg leading-relaxed"
-              style={{ color: "var(--text-secondary)" }}
+              style={{ color: "rgba(255,255,255,0.8)" }}
             >
               {subtitle}
             </p>

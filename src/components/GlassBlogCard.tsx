@@ -13,6 +13,7 @@ interface GlassBlogCardProps {
   date?: string;
   readTime?: string;
   tags?: string[];
+  href?: string;
   className?: string;
 }
 
@@ -39,8 +40,10 @@ export function GlassBlogCard({
   date = defaultPost.date,
   readTime = defaultPost.readTime,
   tags = defaultPost.tags,
+  href,
   className,
 }: GlassBlogCardProps) {
+  const Wrapper = href ? "a" : "div";
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -48,8 +51,9 @@ export function GlassBlogCard({
       transition={{ duration: 0.4 }}
       className={cn("w-full max-w-[400px]", className)}
     >
-      <div
-        className="group relative h-full overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl"
+      <Wrapper
+        {...(href ? { href, target: "_blank", rel: "noopener noreferrer" } : {})}
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border transition-all duration-300 hover:shadow-xl"
         style={{
           borderColor: "var(--border)",
           backgroundColor: "color-mix(in srgb, var(--bg-card) 70%, transparent)",
@@ -148,7 +152,7 @@ export function GlassBlogCard({
             </div>
           </div>
         </div>
-      </div>
+      </Wrapper>
     </motion.div>
   );
 }
