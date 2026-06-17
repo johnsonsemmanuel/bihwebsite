@@ -22,19 +22,20 @@ const contactInfo = [
         <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
       </svg>
     ),
-    label: "Visit",
-    value: "SF / NYC / Remote",
-    href: "#",
+    label: "Schedule your visit",
+    value: "One Airport Square, 8th Floor\nAirport City, Accra, Ghana",
+    subvalue: "Mon – Fri · 8am to 6pm GMT",
+    href: "https://maps.google.com/?q=One+Airport+Square+Accra+Ghana",
   },
   {
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
       </svg>
     ),
-    label: "Response Time",
-    value: "Within 48 hours",
-    href: null,
+    label: "Call directly",
+    value: "+233 54 946 9718",
+    href: "tel:+233549469718",
   },
 ];
 
@@ -107,13 +108,16 @@ export default function Contact({ hideHeading }: { hideHeading?: boolean }) {
                       {info.label}
                     </div>
                     {info.href ? (
-                      <a href={info.href} className="text-sm font-semibold transition-colors hover:text-[#60a5fa]" style={{ color: "var(--text-primary)" }}>
+                      <a href={info.href} className="text-sm font-semibold transition-colors hover:text-[#60a5fa] whitespace-pre-line" style={{ color: "var(--text-primary)" }}>
                         {info.value}
                       </a>
                     ) : (
-                      <div className="text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
+                      <div className="text-sm font-semibold whitespace-pre-line" style={{ color: "var(--text-primary)" }}>
                         {info.value}
                       </div>
+                    )}
+                    {"subvalue" in info && info.subvalue && (
+                      <div className="mt-0.5 text-xs" style={{ color: "var(--text-secondary)" }}>{info.subvalue}</div>
                     )}
                   </div>
                 </motion.div>
