@@ -78,10 +78,7 @@ export default function Hero() {
           <span
             className="relative inline-block"
             style={{
-              background: "linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #818cf8 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
+              color: "var(--accent)",
             }}
           >
             Others Overlook.

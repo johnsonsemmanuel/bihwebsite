@@ -95,7 +95,7 @@ function MenuCard({ item, onClick }: { item: MenuItem; onClick: (href: string) =
       >
         <div className="relative h-24 w-full overflow-hidden rounded-xl">
           <img src={item.img} alt={item.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,30,66,0.9) 0%, rgba(10,30,66,0.3) 60%, transparent 100%)" }} />
+          <div className="absolute inset-0" style={{ background: "rgba(10,30,66,0.55)" }} />
           <div className="absolute bottom-2 left-2 flex items-center gap-1.5 text-xs font-medium text-white">
             {item.icon}{item.title}
           </div>

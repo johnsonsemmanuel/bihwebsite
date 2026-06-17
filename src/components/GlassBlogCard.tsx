@@ -64,11 +64,7 @@ export function GlassBlogCard({
           />
           <div
             className="absolute inset-0 transition-opacity duration-300"
-            style={{
-              background:
-                "linear-gradient(to top, var(--bg-primary) 0%, transparent 60%)",
-              opacity: 0.6,
-            }}
+            style={{ backgroundColor: "rgba(10,18,42,0.5)", opacity: 0.6 }}
           />
 
           <div className="absolute bottom-3 left-3 flex gap-2">

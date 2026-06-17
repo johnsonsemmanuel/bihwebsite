@@ -80,13 +80,7 @@ function TrackCard({ track, index }: { track: typeof tracks[number]; index: numb
               alt={track.title}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(to right, var(--bg-card) 0%, transparent 60%)",
-              }}
-            />
+            <div className="absolute inset-0" style={{ backgroundColor: "color-mix(in srgb, var(--bg-card) 50%, transparent)" }} />
           </div>
 
           <div className="flex flex-col justify-center p-6 md:col-span-3 md:p-8">

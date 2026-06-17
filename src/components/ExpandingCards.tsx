@@ -99,10 +99,7 @@ export const ExpandingCards = React.forwardRef<
           />
           <div
             className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to top, rgba(10,30,74,0.85) 0%, rgba(10,30,74,0.5) 60%, transparent 100%)",
-            }}
+            style={{ backgroundColor: "rgba(10,30,74,0.55)" }}
           />
 
           <article className="absolute inset-0 flex flex-col justify-end gap-2 p-4">

@@ -22,13 +22,7 @@ export default function PageHero({ title, subtitle, image, children }: PageHeroP
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${image})` }}
         />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to bottom, color-mix(in srgb, var(--bg-primary) 70%, transparent) 0%, var(--bg-primary) 100%)",
-          }}
-        />
+        <div className="absolute inset-0" style={{ backgroundColor: "var(--bg-primary)", opacity: 0.7 }} />
       </motion.div>
 
       <div className="relative z-10 mx-auto max-w-4xl px-6 pt-24 text-center">
