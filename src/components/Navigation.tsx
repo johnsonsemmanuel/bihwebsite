@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import {
   Building,
+  ChevronDown,
   ChevronRight,
   MenuIcon,
   Rocket,
@@ -34,17 +35,11 @@ type MenuItem = {
   img: string;
 };
 
-type NavItem = {
-  id: string;
-  label: string;
-  href: string;
-};
-
 const programs: MenuItem[] = [
   {
     title: "Pre-Seed Track",
     href: "/programs",
-    description: "12-week program for pre-product founders",
+    description: "12-week intensive for pre-product founders",
     icon: <Rocket className="h-3 w-3 text-[#60a5fa]" />,
     img: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=400&q=80",
   },
@@ -88,90 +83,97 @@ const about: MenuItem[] = [
   },
 ];
 
-const navItems: NavItem[] = [
-  { id: "stats", label: "Impact", href: "/#stats" },
-  { id: "faq", label: "FAQ", href: "/#faq" },
-];
-
+/* ── Desktop mega-menu card ── */
 function MenuCard({ item, onClick }: { item: MenuItem; onClick: (href: string) => void }) {
   return (
     <NavigationMenuLink asChild>
       <Link
         href={item.href}
-        onClick={(event) => {
-          event.preventDefault();
-          onClick(item.href);
-        }}
+        onClick={(e) => { e.preventDefault(); onClick(item.href); }}
         className="group block select-none space-y-2 rounded-2xl border p-3 no-underline transition-all hover:scale-[1.02] hover:border-accent/60"
-        style={{
-          borderColor: "var(--border)",
-          backgroundColor: "var(--bg-card)",
-        }}
+        style={{ borderColor: "var(--border)", backgroundColor: "var(--bg-card)" }}
       >
         <div className="relative h-24 w-full overflow-hidden rounded-xl">
-          <img
-            src={item.img}
-            alt={item.title}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-          />
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "linear-gradient(to top, rgba(10,30,66,0.9) 0%, rgba(10,30,66,0.3) 60%, transparent 100%)",
-            }}
-          />
+          <img src={item.img} alt={item.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,30,66,0.9) 0%, rgba(10,30,66,0.3) 60%, transparent 100%)" }} />
           <div className="absolute bottom-2 left-2 flex items-center gap-1.5 text-xs font-medium text-white">
-            {item.icon}
-            {item.title}
+            {item.icon}{item.title}
           </div>
         </div>
-        <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
-          {item.description}
-        </p>
+        <p className="text-xs" style={{ color: "var(--text-secondary)" }}>{item.description}</p>
       </Link>
     </NavigationMenuLink>
   );
 }
 
-function MobileMenuCard({
-  item,
-  onClick,
+/* ── Mobile accordion section ── */
+function MobileAccordion({
+  label,
+  items,
+  onNavigate,
 }: {
-  item: MenuItem;
-  onClick: (href: string) => void;
+  label: string;
+  items: MenuItem[];
+  onNavigate: (href: string) => void;
 }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Link
-      href={item.href}
-      onClick={(event) => {
-        event.preventDefault();
-        onClick(item.href);
-      }}
-      className="group flex items-center gap-3 rounded-2xl border p-3 transition-all hover:border-accent/60 hover:bg-accent/10"
-      style={{
-        borderColor: "var(--border)",
-        backgroundColor: "var(--bg-primary)",
-      }}
-    >
-      <div
-        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
-        style={{ backgroundColor: "var(--bg-secondary)", color: "var(--accent)" }}
+    <div className="overflow-hidden rounded-2xl border" style={{ borderColor: "var(--border)" }}>
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="flex w-full items-center justify-between px-4 py-4 text-left text-base font-semibold"
+        style={{ color: "var(--text-primary)", backgroundColor: "var(--bg-card)" }}
       >
-        {item.icon}
-      </div>
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-1 text-sm font-semibold" style={{ color: "var(--text-primary)" }}>
-          {item.title}
-          <ChevronRight className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />
-        </div>
-        <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
-          {item.description}
-        </p>
-      </div>
-    </Link>
+        {label}
+        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
+          <ChevronDown className="h-4 w-4" style={{ color: "var(--text-secondary)" }} />
+        </motion.span>
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="sub"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: EASE }}
+            className="overflow-hidden"
+            style={{ backgroundColor: "var(--bg-primary)" }}
+          >
+            <div className="flex flex-col gap-px">
+              {items.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  onClick={(e) => { e.preventDefault(); onNavigate(item.href); }}
+                  className="flex items-center gap-3 px-4 py-3 transition-colors active:bg-white/5"
+                  style={{ borderTop: "1px solid var(--border)" }}
+                >
+                  <div
+                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
+                    style={{ backgroundColor: "var(--bg-card)", color: "var(--accent)" }}
+                  >
+                    {item.icon}
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>{item.title}</div>
+                    <div className="text-xs" style={{ color: "var(--text-secondary)" }}>{item.description}</div>
+                  </div>
+                  <ChevronRight className="ml-auto h-3.5 w-3.5 shrink-0" style={{ color: "var(--text-secondary)" }} />
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
 
+/* ── Main component ── */
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -184,194 +186,126 @@ export default function Navigation() {
   const scrollToSection = useCallback((id: string) => {
     const target = document.getElementById(id);
     if (!target) return;
-
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    target.scrollIntoView({
-      behavior: prefersReducedMotion ? "auto" : "smooth",
-      block: "start",
-    });
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   }, []);
 
   const navigateTo = useCallback(
     (href: string) => {
       setMobileOpen(false);
-
       const isAnchor = href.startsWith("#") || href.startsWith("/#");
-      if (!isAnchor) return;
-
+      if (!isAnchor) { router.push(href); return; }
       const targetPath = href.startsWith("/#") ? "/" : pathname;
       const id = href.replace(/^\/?#/, "");
-
       setActiveSection(id);
-
       if (pathname !== targetPath) {
         router.push(targetPath);
         window.setTimeout(() => scrollToSection(id), 120);
         return;
       }
-
       scrollToSection(id);
     },
     [pathname, router, scrollToSection],
   );
 
   const handleNavClick = useCallback(
-    (href: string) => (event: React.MouseEvent<HTMLElement>) => {
-      event.preventDefault();
-      navigateTo(href);
-    },
+    (href: string) => (e: React.MouseEvent<HTMLElement>) => { e.preventDefault(); navigateTo(href); },
     [navigateTo],
   );
 
   useEffect(() => {
-    const unsubscribe = scrollY.on("change", (v) => {
-      setScrolled(v > 40);
-    });
-    return () => unsubscribe();
+    const unsub = scrollY.on("change", (v) => setScrolled(v > 40));
+    return () => unsub();
   }, [scrollY]);
 
   useEffect(() => {
-    if (pathname !== "/") {
-      setActiveSection(null);
-      return;
-    }
-
-    const sectionIds = ["hero", "stats", "about", "programs", "testimonials", "faq", "contact"];
-    const observer = new IntersectionObserver(
+    if (pathname !== "/") { setActiveSection(null); return; }
+    const ids = ["hero", "stats", "about", "programs", "testimonials", "faq", "contact"];
+    const obs = new IntersectionObserver(
       (entries) => {
-        const visibleEntries = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visibleEntries[0]?.target.id) {
-          setActiveSection(visibleEntries[0].target.id);
-        }
+        const top = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (top?.target.id) setActiveSection(top.target.id);
       },
-      {
-        rootMargin: "-42% 0px -48% 0px",
-        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-      },
+      { rootMargin: "-42% 0px -48% 0px", threshold: [0, 0.1, 0.25, 0.5, 0.75, 1] },
     );
-
-    sectionIds.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) observer.observe(section);
-    });
-
-    return () => observer.disconnect();
+    ids.forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
+    return () => obs.disconnect();
   }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setMobileOpen(false);
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setMobileOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, []);
-
-  const toggleTheme = () => {
-    setTheme(resolved === "dark" ? "light" : "dark");
-  };
 
   const sectionActive = (id: string) => activeSection === id;
   const pathActive = (href: string) => pathname === href;
 
+  const mobileLinks = [
+    { label: "Impact", href: "/#stats", id: "stats" },
+    { label: "FAQ", href: "/#faq", id: "faq" },
+    { label: "Contact", href: "/contact", id: "contact" },
+  ];
+
   return (
-    <motion.nav
-      className="fixed top-0 left-0 right-0 z-50 py-4 px-6"
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: EASE }}
-    >
-      <motion.div
-        className="relative mx-auto max-w-6xl rounded-full px-4 py-2.5 sm:px-6"
-        style={{
-          backgroundColor: scrolled ? "var(--bg-secondary)" : "rgba(16, 42, 84, 0.72)",
-          border: scrolled ? "1px solid var(--border)" : "1px solid rgba(255,255,255,0.12)",
-          boxShadow: scrolled ? "0 12px 50px rgba(0,0,0,0.22)" : "0 10px 40px rgba(0,0,0,0.16)",
-          backdropFilter: "blur(18px)",
-          WebkitBackdropFilter: "blur(18px)",
-          overflow: "visible",
-        }}
+    <>
+      <motion.nav
+        className="fixed top-0 left-0 right-0 z-50 px-4 py-3 sm:px-6 sm:py-4"
+        initial={{ y: -80 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: EASE }}
       >
-        <div className="flex items-center justify-between gap-3">
+        <div
+          className="mx-auto flex max-w-6xl items-center justify-between rounded-full px-4 py-2.5"
+          style={{
+            backgroundColor: scrolled ? "var(--bg-secondary)" : "rgba(16,42,84,0.72)",
+            border: scrolled ? "1px solid var(--border)" : "1px solid rgba(255,255,255,0.12)",
+            boxShadow: scrolled ? "0 12px 50px rgba(0,0,0,0.22)" : "0 10px 40px rgba(0,0,0,0.16)",
+            backdropFilter: "blur(18px)",
+            WebkitBackdropFilter: "blur(18px)",
+          }}
+        >
+          {/* Logo */}
           <Link href="/" className="flex shrink-0 items-center" aria-label="BlueSPACE home">
             <img src="/bih2.png" alt="BlueSPACE" className="h-8 w-auto" />
           </Link>
 
+          {/* Desktop nav */}
           <div className="hidden items-center gap-1 md:flex">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger
-                    className="rounded-full px-3 py-1 text-sm font-medium transition-colors"
-                    style={{
-                      color:
-                        pathname === "/programs" || sectionActive("programs")
-                          ? "var(--white)"
-                          : "var(--text-secondary)",
-                    }}
-                  >
+                  <NavigationMenuTrigger style={{ color: sectionActive("programs") || pathActive("/programs") ? "var(--white)" : "var(--text-secondary)" }}>
                     Programs
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="rounded-3xl p-4">
                     <ul className="grid w-[360px] gap-2 md:w-[520px] md:grid-cols-2 lg:w-[640px]">
-                      {programs.map((p) => (
-                        <li key={p.title}>
-                          <MenuCard item={p} onClick={navigateTo} />
-                        </li>
-                      ))}
+                      {programs.map((p) => <li key={p.title}><MenuCard item={p} onClick={navigateTo} /></li>)}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger
-                    className="rounded-full px-3 py-1 text-sm font-medium transition-colors"
-                    style={{
-                      color:
-                        pathname === "/about" || sectionActive("about")
-                          ? "var(--white)"
-                          : "var(--text-secondary)",
-                    }}
-                  >
+                  <NavigationMenuTrigger style={{ color: sectionActive("about") || pathActive("/about") ? "var(--white)" : "var(--text-secondary)" }}>
                     About
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="rounded-3xl p-4">
                     <ul className="grid w-[320px] gap-2">
-                      {about.map((a) => (
-                        <li key={a.title}>
-                          <MenuCard item={a} onClick={navigateTo} />
-                        </li>
-                      ))}
+                      {about.map((a) => <li key={a.title}><MenuCard item={a} onClick={navigateTo} /></li>)}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {navItems.map((item) => (
+                {[{ label: "Impact", href: "/#stats", id: "stats" }, { label: "FAQ", href: "/#faq", id: "faq" }].map((item) => (
                   <NavigationMenuItem key={item.id}>
                     <NavigationMenuLink asChild>
-                      <Link
-                        href={item.href}
-                        onClick={handleNavClick(item.href)}
-                        className="relative rounded-full px-3 py-2 text-sm font-medium transition-colors"
-                        style={{
-                          backgroundColor:
-                            pathActive("/impact") || sectionActive(item.id) ? "var(--accent)" : "transparent",
-                          color:
-                            pathActive("/impact") || sectionActive(item.id)
-                              ? "var(--white)"
-                              : "var(--text-secondary)",
-                        }}
-                      >
+                      <Link href={item.href} onClick={handleNavClick(item.href)} className="rounded-full px-3 py-2 text-sm font-medium transition-colors"
+                        style={{ backgroundColor: sectionActive(item.id) ? "var(--accent)" : "transparent", color: sectionActive(item.id) ? "var(--white)" : "var(--text-secondary)" }}>
                         {item.label}
                       </Link>
                     </NavigationMenuLink>
@@ -380,15 +314,8 @@ export default function Navigation() {
 
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link
-                      href="/contact"
-                      onClick={handleNavClick("/contact")}
-                      className="relative rounded-full px-3 py-2 text-sm font-medium transition-colors"
-                      style={{
-                        backgroundColor: pathActive("/contact") ? "var(--accent)" : "transparent",
-                        color: pathActive("/contact") ? "var(--white)" : "var(--text-secondary)",
-                      }}
-                    >
+                    <Link href="/contact" onClick={handleNavClick("/contact")} className="rounded-full px-3 py-2 text-sm font-medium transition-colors"
+                      style={{ backgroundColor: pathActive("/contact") ? "var(--accent)" : "transparent", color: pathActive("/contact") ? "var(--white)" : "var(--text-secondary)" }}>
                       Contact
                     </Link>
                   </NavigationMenuLink>
@@ -396,171 +323,100 @@ export default function Navigation() {
               </NavigationMenuList>
             </NavigationMenu>
 
-            <Button
-              onClick={toggleTheme}
-              variant="ghost"
-              size="icon"
-              aria-label="Toggle theme"
-              className="ml-1 rounded-full"
-            >
+            <Button onClick={() => setTheme(resolved === "dark" ? "light" : "dark")} variant="ghost" size="icon" aria-label="Toggle theme" className="ml-1 rounded-full">
               {resolved === "dark" ? <Sun className="h-4 w-4" /> : <MoonIcon />}
             </Button>
-
             <Button asChild size="sm" className="ml-1 rounded-full">
-              <Link href="/contact" onClick={handleNavClick("/contact")}>
-                Get Started
-              </Link>
+              <Link href="/contact">Get Started</Link>
             </Button>
           </div>
 
-          <div className="flex items-center gap-2 md:hidden">
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="flex h-10 w-10 items-center justify-center rounded-full"
-              style={{ color: "var(--text-secondary)" }}
-            >
+          {/* Mobile controls */}
+          <div className="flex items-center gap-1 md:hidden">
+            <button onClick={() => setTheme(resolved === "dark" ? "light" : "dark")} aria-label="Toggle theme"
+              className="flex h-10 w-10 items-center justify-center rounded-full" style={{ color: "var(--text-secondary)" }}>
               {resolved === "dark" ? <Sun className="h-5 w-5" /> : <MoonIcon />}
             </button>
-
-            <button
-              onClick={() => setMobileOpen((open) => !open)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-              className="flex h-10 w-10 items-center justify-center rounded-full"
-              style={{ color: "var(--text-primary)" }}
-            >
+            <button onClick={() => setMobileOpen((o) => !o)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen}
+              className="flex h-10 w-10 items-center justify-center rounded-full" style={{ color: "var(--text-primary)" }}>
               {mobileOpen ? <XIcon className="h-5 w-5" /> : <MenuIcon className="h-5 w-5" />}
             </button>
           </div>
         </div>
+      </motion.nav>
 
-        <motion.div
-          initial={false}
-          animate={{ opacity: mobileOpen ? 1 : 0, y: mobileOpen ? 0 : -8 }}
-          exit={{ opacity: 0, y: -8 }}
-          className="absolute inset-x-0 top-full mx-auto max-w-6xl px-4 pb-4"
-          style={{ pointerEvents: mobileOpen ? "auto" : "none" }}
-        >
-          <div
-            className="overflow-hidden rounded-3xl border p-4 shadow-2xl"
-            style={{
-              borderColor: "var(--border)",
-              backgroundColor: "var(--bg-secondary)",
-              backdropFilter: "blur(24px)",
-              WebkitBackdropFilter: "blur(24px)",
-            }}
+      {/* Mobile drawer — full-screen, scrollable */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            key="drawer"
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.3, ease: EASE }}
+            className="fixed inset-0 z-40 flex flex-col md:hidden"
+            style={{ backgroundColor: "var(--bg-primary)" }}
           >
-            <div className="grid gap-2">
-              <button
-                type="button"
-                onClick={handleNavClick("/programs")}
-                className="flex items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition-colors hover:border-accent/60 hover:bg-accent/10"
-                style={{ borderColor: "var(--border)", color: "var(--text-primary)" }}
-              >
-                Programs
-                <ChevronRight className="h-4 w-4" />
+            {/* Drawer header */}
+            <div className="flex shrink-0 items-center justify-between border-b px-5 py-4" style={{ borderColor: "var(--border)" }}>
+              <img src="/bih2.png" alt="BlueSPACE" className="h-8 w-auto" />
+              <button onClick={() => setMobileOpen(false)} aria-label="Close menu"
+                className="flex h-10 w-10 items-center justify-center rounded-full" style={{ color: "var(--text-primary)" }}>
+                <XIcon className="h-5 w-5" />
               </button>
-              <button
-                type="button"
-                onClick={handleNavClick("/about")}
-                className="flex items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition-colors hover:border-accent/60 hover:bg-accent/10"
-                style={{ borderColor: "var(--border)", color: "var(--text-primary)" }}
-              >
-                About
-                <ChevronRight className="h-4 w-4" />
-              </button>
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={handleNavClick(item.href)}
-                  className="flex items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition-colors hover:border-accent/60 hover:bg-accent/10"
+            </div>
+
+            {/* Scrollable body */}
+            <div className="flex-1 overflow-y-auto px-4 py-5 space-y-2">
+
+              {/* Accordion groups */}
+              <MobileAccordion label="Programs" items={programs} onNavigate={navigateTo} />
+              <MobileAccordion label="About" items={about} onNavigate={navigateTo} />
+
+              {/* Flat links */}
+              {mobileLinks.map((item) => (
+                <button key={item.id} type="button" onClick={() => navigateTo(item.href)}
+                  className="flex w-full items-center justify-between rounded-2xl border px-4 py-4 text-left text-base font-semibold transition-colors"
                   style={{
-                    borderColor: sectionActive(item.id) ? "var(--accent)" : "var(--border)",
-                    backgroundColor: sectionActive(item.id) ? "var(--accent)" : "transparent",
-                    color: sectionActive(item.id) ? "var(--white)" : "var(--text-primary)",
-                  }}
-                >
+                    borderColor: sectionActive(item.id) || pathActive(item.href) ? "var(--accent)" : "var(--border)",
+                    backgroundColor: sectionActive(item.id) || pathActive(item.href) ? "color-mix(in srgb, var(--accent) 12%, transparent)" : "var(--bg-card)",
+                    color: sectionActive(item.id) || pathActive(item.href) ? "var(--accent)" : "var(--text-primary)",
+                  }}>
                   {item.label}
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className="h-4 w-4 opacity-40" />
                 </button>
               ))}
-              <button
-                type="button"
-                onClick={handleNavClick("/contact")}
-                className="flex items-center justify-between rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition-colors hover:border-accent/60 hover:bg-accent/10"
-                style={{
-                  borderColor: pathActive("/contact") ? "var(--accent)" : "var(--border)",
-                  backgroundColor: pathActive("/contact") ? "var(--accent)" : "transparent",
-                  color: pathActive("/contact") ? "var(--white)" : "var(--text-primary)",
-                }}
-              >
-                Contact
-                <ChevronRight className="h-4 w-4" />
-              </button>
             </div>
 
-            <div className="mt-4 grid gap-3">
-              <div className="space-y-2">
-                <p className="px-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-secondary)" }}>
-                  Programs
-                </p>
-                {programs.map((item) => (
-                  <MobileMenuCard key={item.title} item={item} onClick={navigateTo} />
-                ))}
-              </div>
-              <div className="space-y-2">
-                <p className="px-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--text-secondary)" }}>
-                  About
-                </p>
-                {about.map((item) => (
-                  <MobileMenuCard key={item.title} item={item} onClick={navigateTo} />
-                ))}
+            {/* Fixed footer */}
+            <div className="shrink-0 border-t px-4 py-5 space-y-3" style={{ borderColor: "var(--border)" }}>
+              <Button asChild size="lg" className="w-full rounded-full">
+                <Link href="/contact" onClick={() => setMobileOpen(false)}>Apply Now</Link>
+              </Button>
+              <div className="flex items-center justify-center gap-6">
+                <a href="#" aria-label="LinkedIn" className="transition-colors hover:text-[#60a5fa]" style={{ color: "var(--text-secondary)" }}>
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                  </svg>
+                </a>
+                <a href="#" aria-label="X / Twitter" className="transition-colors hover:text-[#60a5fa]" style={{ color: "var(--text-secondary)" }}>
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
               </div>
             </div>
-
-            <Button asChild size="lg" className="mt-4 w-full rounded-full">
-              <Link href="/contact" onClick={handleNavClick("/contact")}>
-                Get Started
-              </Link>
-            </Button>
-
-            {/* Social links */}
-            <div className="mt-4 flex items-center justify-center gap-6 border-t pt-4" style={{ borderColor: "var(--border)" }}>
-              <a href="#" aria-label="LinkedIn" className="transition-colors hover:text-[#60a5fa]" style={{ color: "var(--text-secondary)" }}>
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                </svg>
-              </a>
-              <a href="#" aria-label="X / Twitter" className="transition-colors hover:text-[#60a5fa]" style={{ color: "var(--text-secondary)" }}>
-                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-              </a>
-            </div>
-          </div>
-        </motion.div>
-      </motion.div>
-    </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
 function MoonIcon() {
   return (
-    <svg
-      className="h-4 w-4"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={2}
-      aria-hidden="true"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-      />
+    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
     </svg>
   );
 }
