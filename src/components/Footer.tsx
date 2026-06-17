@@ -62,9 +62,11 @@ export default function Footer() {
                   Programs
                 </h4>
                 <div className="flex flex-col gap-2 text-sm">
-                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/programs">Pre-Seed Track</Link>
-                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/programs">Seed Accelerator</Link>
-                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/programs">Scale Program</Link>
+                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/programs/talent">TalentFACTORY</Link>
+                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/programs/accelerator">AcceleratorFACTORY</Link>
+                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/programs/code">CodeFACTORY</Link>
+                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/programs/digital">DigitalFACTORY</Link>
+                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/programs/capital">CapitalFACTORY</Link>
                 </div>
               </div>
               <div className="flex flex-col gap-4">
@@ -73,6 +75,10 @@ export default function Footer() {
                 </h4>
                 <div className="flex flex-col gap-2 text-sm">
                   <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/about">About</Link>
+                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/news">News</Link>
+                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/events">Events</Link>
+                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/impact-report">Impact Report</Link>
+                  <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/faq">FAQ</Link>
                   <Link className="transition-colors" style={{ color: "var(--text-secondary)" }} href="/contact">Contact</Link>
                 </div>
               </div>
