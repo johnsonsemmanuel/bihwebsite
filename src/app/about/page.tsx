@@ -88,51 +88,73 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Powered by / Why BIH-DEVS */}
-          <div className="grid gap-6 md:grid-cols-2">
-            <AnimatedSection>
-              <div className="group relative overflow-hidden rounded-2xl border" style={{ borderColor: "var(--border)" }}>
-                <div className="relative h-48 overflow-hidden sm:h-52">
-                  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 30%, var(--bg-card) 100%)" }} />
-                </div>
-                <div className="relative -mt-16 p-6">
-                  <h3 className="mb-3 text-xl font-bold" style={{ color: "var(--text-primary)" }}>
-                    Powered by World-Class Infrastructure
-                  </h3>
-                  <p className="mb-4 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+          {/* Powered by World-Class Infrastructure */}
+          <AnimatedSection>
+            <div className="relative overflow-hidden rounded-3xl">
+              <div className="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80" alt="" className="h-full w-full object-cover" />
+                <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.75)" }} />
+              </div>
+              <div className="relative px-8 py-16 sm:px-12 sm:py-20">
+                <div className="mx-auto max-w-4xl">
+                  <div className="mb-2 inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--accent)", backgroundColor: "rgba(255,255,255,0.1)" }}>
+                    Infrastructure
+                  </div>
+                  <h2 className="mb-4 text-2xl font-bold text-white sm:text-3xl">Powered by World-Class Infrastructure</h2>
+                  <p className="mb-8 max-w-2xl text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>
                     Our studio&apos;s unique competitive advantage lies in our foundational enablers. Every venture we launch is instantly supercharged by:
                   </p>
-                  <ul className="space-y-3 text-sm" style={{ color: "var(--text-secondary)" }}>
-                    <li><strong style={{ color: "var(--text-primary)" }}>The BlueSPACE Financial CLOUD (BFC):</strong> Our proprietary, AI-driven financial platform that provides ventures and enterprise clients with plug-and-play transaction processing, predictive analytics, and robust API networks.</li>
-                    <li><strong style={{ color: "var(--text-primary)" }}>The FundMatrix Program:</strong> A sophisticated funding coalition managed in lockstep with licensed asset management and telecom heavyweights to ensure an uninterrupted flow of capital from seed stages to cross-border expansion.</li>
-                  </ul>
+                  <div className="grid gap-6 sm:grid-cols-2">
+                    <div className="rounded-xl border p-5" style={{ borderColor: "rgba(255,255,255,0.15)", backgroundColor: "rgba(255,255,255,0.06)" }}>
+                      <h3 className="mb-2 text-base font-bold text-white">The BlueSPACE Financial CLOUD (BFC)</h3>
+                      <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>Our proprietary, AI-driven financial platform that provides ventures and enterprise clients with plug-and-play transaction processing, predictive analytics, and robust API networks.</p>
+                    </div>
+                    <div className="rounded-xl border p-5" style={{ borderColor: "rgba(255,255,255,0.15)", backgroundColor: "rgba(255,255,255,0.06)" }}>
+                      <h3 className="mb-2 text-base font-bold text-white">The FundMatrix Program</h3>
+                      <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>A sophisticated funding coalition managed in lockstep with licensed asset management and telecom heavyweights to ensure an uninterrupted flow of capital from seed stages to cross-border expansion.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </AnimatedSection>
-            <AnimatedSection delay={0.1}>
-              <div className="group relative overflow-hidden rounded-2xl border" style={{ borderColor: "var(--border)" }}>
-                <div className="relative h-48 overflow-hidden sm:h-52">
-                  <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80" alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 30%, var(--bg-card) 100%)" }} />
-                </div>
-                <div className="relative -mt-16 p-6">
-                  <h3 className="mb-3 text-xl font-bold" style={{ color: "var(--text-primary)" }}>
-                    Why BIH-DEVS?
-                  </h3>
-                  <p className="mb-4 text-sm font-semibold" style={{ color: "var(--accent)" }}>
-                    The Venture Studio Advantage
-                  </p>
-                  <ul className="space-y-3 text-sm" style={{ color: "var(--text-secondary)" }}>
-                    <li><strong style={{ color: "var(--text-primary)" }}>A Holistic Ecosystem:</strong> Skills build talent, talent designs platforms, platforms power ventures, and ventures attract institutional capital.</li>
-                    <li><strong style={{ color: "var(--text-primary)" }}>Proprietary AI Tech:</strong> Every venture we build launches with an unfair advantage by utilizing the pre-built architecture of the BlueSPACE Financial CLOUD.</li>
-                    <li><strong style={{ color: "var(--text-primary)" }}>Guaranteed Funding Pathways:</strong> Our managed FundMatrix program ensures our portfolio ventures bypass the traditional early-stage funding bottleneck.</li>
-                    <li><strong style={{ color: "var(--text-primary)" }}>Pan-African Scale:</strong> Using Ghana as a strategic launchpad, we build architectures engineered for rapid cross-border expansion.</li>
-                  </ul>
+            </div>
+          </AnimatedSection>
+
+          {/* Why BIH-DEVS */}
+          <AnimatedSection delay={0.1}>
+            <div className="relative overflow-hidden rounded-3xl">
+              <div className="absolute inset-0">
+                <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&q=80" alt="" className="h-full w-full object-cover" />
+                <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.75)" }} />
+              </div>
+              <div className="relative px-8 py-16 sm:px-12 sm:py-20">
+                <div className="mx-auto max-w-4xl">
+                  <div className="mb-2 inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--accent)", backgroundColor: "rgba(255,255,255,0.1)" }}>
+                    Advantage
+                  </div>
+                  <h2 className="mb-2 text-2xl font-bold text-white sm:text-3xl">Why BIH-DEVS?</h2>
+                  <p className="mb-8 text-sm font-semibold" style={{ color: "var(--accent)" }}>The Venture Studio Advantage</p>
+                  <div className="grid gap-5 sm:grid-cols-2">
+                    <div className="rounded-xl border p-5" style={{ borderColor: "rgba(255,255,255,0.15)", backgroundColor: "rgba(255,255,255,0.06)" }}>
+                      <h3 className="mb-1.5 text-sm font-bold text-white">A Holistic Ecosystem</h3>
+                      <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>Skills build talent, talent designs platforms, platforms power ventures, and ventures attract institutional capital.</p>
+                    </div>
+                    <div className="rounded-xl border p-5" style={{ borderColor: "rgba(255,255,255,0.15)", backgroundColor: "rgba(255,255,255,0.06)" }}>
+                      <h3 className="mb-1.5 text-sm font-bold text-white">Proprietary AI Tech</h3>
+                      <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>Every venture we build launches with an unfair advantage by utilizing the pre-built architecture of the BlueSPACE Financial CLOUD.</p>
+                    </div>
+                    <div className="rounded-xl border p-5" style={{ borderColor: "rgba(255,255,255,0.15)", backgroundColor: "rgba(255,255,255,0.06)" }}>
+                      <h3 className="mb-1.5 text-sm font-bold text-white">Guaranteed Funding Pathways</h3>
+                      <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>Our managed FundMatrix program ensures our portfolio ventures bypass the traditional early-stage funding bottleneck.</p>
+                    </div>
+                    <div className="rounded-xl border p-5" style={{ borderColor: "rgba(255,255,255,0.15)", backgroundColor: "rgba(255,255,255,0.06)" }}>
+                      <h3 className="mb-1.5 text-sm font-bold text-white">Pan-African Scale</h3>
+                      <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>Using Ghana as a strategic launchpad, we build architectures engineered for rapid cross-border expansion.</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </AnimatedSection>
-          </div>
+            </div>
+          </AnimatedSection>
 
           {/* Team */}
           <div>
