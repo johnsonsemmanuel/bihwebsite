@@ -28,10 +28,29 @@ export default function AlbumPage({ params }: { params: Promise<{ id: string }> 
           <div className="mt-4 flex items-baseline gap-3">
             <h1 className="text-3xl font-bold" style={{ color: "var(--text-primary)" }}>{event.name}</h1>
             <span className="rounded-full border px-2.5 py-0.5 text-xs font-medium" style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}>{event.year}</span>
-            <span className="text-xs" style={{ color: "var(--text-secondary)" }}>{event.photos.length} photos</span>
+            {event.photos.length > 0 && <span className="text-xs" style={{ color: "var(--text-secondary)" }}>{event.photos.length} photos</span>}
+            {event.video && <span className="text-xs" style={{ color: "var(--text-secondary)" }}>1 video</span>}
           </div>
         </div>
       </div>
+
+      {/* Video */}
+      {event.video && (
+        <section className="px-6 pb-8">
+          <div className="mx-auto max-w-4xl">
+            <video
+              src={event.video}
+              controls
+              playsInline
+              preload="metadata"
+              className="w-full rounded-xl shadow-lg"
+              style={{ maxHeight: "70vh" }}
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </section>
+      )}
 
       {/* Photo grid */}
       <section className="px-6 pb-24">
