@@ -68,8 +68,8 @@ export default function AboutPage() {
           {/* Vision & Mission */}
           <AnimatedSection className="grid gap-6 md:grid-cols-2">
             {[
-              { label: "Vision", text: "To be the leading innovation center that creates the platform for digital transformation and serves as the fertile ground for next generation solutions." },
-              { label: "Mission", text: "To create a sustainable innovation ecosystem by creating a nexus between innovation and impact." },
+              { label: "Vision", text: "Our ultimate vision is to cement West Africa's position as a global leader in digital innovation, using Ghana as our strategic launchpad to drive Africa's digital transformation." },
+              { label: "Mission", text: "To drive Ghana and Africa's digital transformation, fostering deep economic growth, regional financial inclusion, and world-class digital talent through institutional-grade venture building." },
             ].map((item) => (
               <div key={item.label} className="rounded-2xl border p-8" style={{ borderColor: "var(--border)", backgroundColor: "var(--bg-card)" }}>
                 <div className="mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--accent)" }}>{item.label}</div>

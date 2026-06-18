@@ -50,10 +50,19 @@ export default function Footer() {
               <div className="flex items-center">
                 <img src="/bih2.png" alt="BlueSPACE" className="h-8 w-auto" />
               </div>
+              <h3 className="text-lg font-bold leading-tight" style={{ color: "var(--text-primary)" }}>
+                Let&apos;s Build the Next<br />African Unicorn, Together.
+              </h3>
               <p className="max-w-xs text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                We accelerate early-stage ventures with strategic funding,
-                world-class mentorship, and a network built for breakthrough growth.
+                Whether you are an institutional investor, a strategic corporate partner, or an elite tech talent looking to build something monumental — there is a place for you in the studio.
               </p>
+              <a
+                href="mailto:innovationhub@bluespaceafrica.com"
+                className="mt-2 text-sm font-medium transition-colors hover:opacity-80"
+                style={{ color: "var(--accent)" }}
+              >
+                innovationhub@bluespaceafrica.com
+              </a>
             </div>
 
             <div className="grid grid-cols-2 gap-10 md:flex md:gap-20">

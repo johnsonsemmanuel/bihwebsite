@@ -12,7 +12,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
 const STATS = [
-  { value: "5", label: "Factory Programs" },
+  { value: "5", label: "Venture-Building Pillars" },
   { value: "120+", label: "Startups Accelerated" },
   { value: "10K+", label: "Lives Impacted" },
 ];
@@ -105,10 +105,10 @@ export default function Hero() {
           className="mb-6 text-5xl font-bold leading-[1.08] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
           style={{ color: "var(--text-primary)" }}
         >
-          Digital Accelerator
+          Building The Future Of Africa's
           <br />
           <span className="relative inline-block" style={{ color: "var(--accent)" }}>
-            Factory.
+            Financial & Digital Infrastructure
           </span>
         </motion.h1>
 
@@ -120,7 +120,7 @@ export default function Hero() {
           className="mx-0 mb-10 max-w-xl text-lg leading-relaxed"
           style={{ color: "var(--text-secondary)" }}
         >
-          We build, train, and deploy Africa's next generation of founders and talent, through five purpose-built factories designed to take ideas from zero to scale.
+          We don't just invest in startups, we build them from the ground up. BIH-DEVS is Africa's premier Digital Economy Venture Studio, co-creating high-impact ventures that scale.
         </motion.p>
 
         {/* CTA hierarchy */}
@@ -132,7 +132,7 @@ export default function Hero() {
         >
           <Button asChild size="lg" className="group rounded-full px-8 text-base">
             <Link href="/contact">
-              Apply Now
+              Partner With Us
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
@@ -143,7 +143,7 @@ export default function Hero() {
             style={{ color: "var(--text-secondary)" }}
             onClick={() => smoothScrollTo("programs")}
           >
-            Explore Programs
+            Explore Our Pillars
           </Button>
         </motion.div>
 

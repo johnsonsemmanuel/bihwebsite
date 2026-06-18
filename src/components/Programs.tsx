@@ -25,14 +25,14 @@ export default function Programs() {
         <AnimatedSection className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <span className="mb-2 block text-xs font-semibold tracking-widest uppercase" style={{ color: "var(--text-secondary)" }}>
-              Our Programs
+              THE FIVE PILLARS
             </span>
             <h2 className="text-3xl font-bold sm:text-4xl" style={{ color: "var(--text-primary)" }}>
-              Five Factories. One Mission.
+              Our Venture-Building Engine
             </h2>
           </div>
           <p className="max-w-sm text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-            From talent to capital, every factory is built to move your startup forward.
+            Our studio is built on five deeply interconnected, self-reinforcing operational factories designed to move a company from an idea to a regional powerhouse.
           </p>
         </AnimatedSection>
 
