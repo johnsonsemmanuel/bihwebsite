@@ -12,8 +12,8 @@ const contactInfo = [
       </svg>
     ),
     label: "Email",
-    value: "info@bluespaceafrica.com",
-    href: "mailto:info@bluespaceafrica.com",
+    value: "innovationhub@bluespaceafrica.com",
+    href: "mailto:innovationhub@bluespaceafrica.com",
   },
   {
     icon: (

@@ -56,13 +56,6 @@ export default function Footer() {
               <p className="max-w-xs text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                 Whether you are an institutional investor, a strategic corporate partner, or an elite tech talent looking to build something monumental — there is a place for you in the studio.
               </p>
-              <a
-                href="mailto:innovationhub@bluespaceafrica.com"
-                className="mt-2 text-sm font-medium transition-colors hover:opacity-80"
-                style={{ color: "var(--accent)" }}
-              >
-                innovationhub@bluespaceafrica.com
-              </a>
             </div>
 
             <div className="grid grid-cols-2 gap-10 md:flex md:gap-20">
