@@ -47,15 +47,15 @@
 }
 
 [data-theme="light"] {
-  --bg-primary:    #f6f8fa;
-  --bg-secondary:  #ffffff;
+  --bg-primary:    #f0f4fa;
+  --bg-secondary:  #f7f9fc;
   --bg-card:       #ffffff;
-  --border:        #d0d7de;
-  --accent:        #0000ff;
-  --accent-hover:  #0000cc;
-  --accent-muted:  rgba(0,0,255,0.08);
-  --text-primary:  #1f2937;
-  --text-secondary:#6b7280;
+  --border:        #d6dfeb;
+  --accent:        #2563eb;
+  --accent-hover:  #1d4ed8;
+  --accent-muted:  rgba(37,99,235,0.08);
+  --text-primary:  #0f1825;
+  --text-secondary:#4b5a72;
   --white:         #ffffff;
 }
 

@@ -28,7 +28,6 @@ export default function Hero() {
   const playerRef = useRef<YT.Player | null>(null);
 
   useEffect(() => {
-    // Load YouTube IFrame API
     if (!window.YT) {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -39,21 +38,20 @@ export default function Hero() {
       playerRef.current = new window.YT.Player("yt-bg", {
         events: {
           onReady: (e: YT.PlayerEvent) => e.target.playVideo(),
+          onStateChange: (e: YT.OnStateChangeEvent) => {
+            if (e.data === YT.PlayerState.ENDED) {
+              e.target.seekTo(15, true);
+              e.target.playVideo();
+            }
+          },
         },
       });
     };
 
-    // Poll every second, seek back to start=15 at 75s (15 start + 60s)
-    const interval = setInterval(() => {
-      const p = playerRef.current;
-      if (p && typeof p.getCurrentTime === "function") {
-        if (p.getCurrentTime() >= 75) {
-          p.seekTo(15, true);
-        }
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
+    return () => {
+      playerRef.current?.destroy();
+      playerRef.current = null;
+    };
   }, []);
 
   return (
@@ -68,12 +66,14 @@ export default function Hero() {
       >
         <iframe
           id="yt-bg"
-          src="https://www.youtube.com/embed/zYyXM1X8jZw?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&start=15&enablejsapi=1"
+          src="https://www.youtube.com/embed/zYyXM1X8jZw?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&start=15&enablejsapi=1&fs=0"
           allow="autoplay; encrypted-media"
           title="Background"
           className="absolute left-1/2 top-1/2 h-[56.25vw] min-h-full w-full min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2"
           style={{ border: "none", pointerEvents: "none" }}
         />
+        <div className="absolute left-0 right-0 top-0 z-10 h-16" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.95), transparent)" }} />
+        <div className="absolute bottom-0 left-0 right-0 z-10 h-20" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.95), transparent)" }} />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.62)" }} />
       </motion.div>
 
