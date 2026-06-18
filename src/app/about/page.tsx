@@ -66,49 +66,73 @@ export default function AboutPage() {
         <div className="mx-auto max-w-6xl space-y-24">
 
           {/* Vision & Mission */}
-          <AnimatedSection className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             {[
-              { label: "Vision", text: "Our ultimate vision is to cement West Africa's position as a global leader in digital innovation, using Ghana as our strategic launchpad to drive Africa's digital transformation." },
-              { label: "Mission", text: "To drive Ghana and Africa's digital transformation, fostering deep economic growth, regional financial inclusion, and world-class digital talent through institutional-grade venture building." },
-            ].map((item) => (
-              <div key={item.label} className="rounded-2xl border p-8" style={{ borderColor: "var(--border)", backgroundColor: "var(--bg-card)" }}>
-                <div className="mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--accent)" }}>{item.label}</div>
-                <p className="text-base leading-relaxed" style={{ color: "var(--text-primary)" }}>{item.text}</p>
-              </div>
+              { label: "Vision", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80", text: "Our ultimate vision is to cement West Africa's position as a global leader in digital innovation, using Ghana as our strategic launchpad to drive Africa's digital transformation." },
+              { label: "Mission", img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80", text: "To drive Ghana and Africa's digital transformation, fostering deep economic growth, regional financial inclusion, and world-class digital talent through institutional-grade venture building." },
+            ].map((item, i) => (
+              <AnimatedSection key={item.label} delay={i * 0.1}>
+                <div className="group relative overflow-hidden rounded-2xl border" style={{ borderColor: "var(--border)" }}>
+                  <div className="relative h-48 overflow-hidden sm:h-56">
+                    <img src={item.img} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 40%, var(--bg-card) 100%)" }} />
+                  </div>
+                  <div className="relative -mt-16 p-6">
+                    <div className="mb-3 inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-widest" style={{ color: "var(--accent)", backgroundColor: "color-mix(in srgb, var(--accent) 12%, transparent)" }}>
+                      {item.label}
+                    </div>
+                    <p className="text-base leading-relaxed" style={{ color: "var(--text-primary)" }}>{item.text}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
             ))}
-          </AnimatedSection>
+          </div>
 
           {/* Powered by / Why BIH-DEVS */}
-          <AnimatedSection>
-            <div className="grid gap-6 md:grid-cols-2">
-              <div className="rounded-2xl border p-8" style={{ borderColor: "var(--border)", backgroundColor: "var(--bg-card)" }}>
-                <h3 className="mb-4 text-xl font-bold" style={{ color: "var(--text-primary)" }}>
-                  Powered by World-Class Infrastructure
-                </h3>
-                <p className="mb-4 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-                  Our studio&apos;s unique competitive advantage lies in our foundational enablers. Every venture we launch is instantly supercharged by:
-                </p>
-                <ul className="space-y-3 text-sm" style={{ color: "var(--text-secondary)" }}>
-                  <li><strong style={{ color: "var(--text-primary)" }}>The BlueSPACE Financial CLOUD (BFC):</strong> Our proprietary, AI-driven financial platform that provides ventures and enterprise clients with plug-and-play transaction processing, predictive analytics, and robust API networks.</li>
-                  <li><strong style={{ color: "var(--text-primary)" }}>The FundMatrix Program:</strong> A sophisticated funding coalition managed in lockstep with licensed asset management and telecom heavyweights to ensure an uninterrupted flow of capital from seed stages to cross-border expansion.</li>
-                </ul>
+          <div className="grid gap-6 md:grid-cols-2">
+            <AnimatedSection>
+              <div className="group relative overflow-hidden rounded-2xl border" style={{ borderColor: "var(--border)" }}>
+                <div className="relative h-48 overflow-hidden sm:h-52">
+                  <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 30%, var(--bg-card) 100%)" }} />
+                </div>
+                <div className="relative -mt-16 p-6">
+                  <h3 className="mb-3 text-xl font-bold" style={{ color: "var(--text-primary)" }}>
+                    Powered by World-Class Infrastructure
+                  </h3>
+                  <p className="mb-4 text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                    Our studio&apos;s unique competitive advantage lies in our foundational enablers. Every venture we launch is instantly supercharged by:
+                  </p>
+                  <ul className="space-y-3 text-sm" style={{ color: "var(--text-secondary)" }}>
+                    <li><strong style={{ color: "var(--text-primary)" }}>The BlueSPACE Financial CLOUD (BFC):</strong> Our proprietary, AI-driven financial platform that provides ventures and enterprise clients with plug-and-play transaction processing, predictive analytics, and robust API networks.</li>
+                    <li><strong style={{ color: "var(--text-primary)" }}>The FundMatrix Program:</strong> A sophisticated funding coalition managed in lockstep with licensed asset management and telecom heavyweights to ensure an uninterrupted flow of capital from seed stages to cross-border expansion.</li>
+                  </ul>
+                </div>
               </div>
-              <div className="rounded-2xl border p-8" style={{ borderColor: "var(--border)", backgroundColor: "var(--bg-card)" }}>
-                <h3 className="mb-4 text-xl font-bold" style={{ color: "var(--text-primary)" }}>
-                  Why BIH-DEVS?
-                </h3>
-                <p className="mb-4 text-sm font-semibold" style={{ color: "var(--accent)" }}>
-                  The Venture Studio Advantage
-                </p>
-                <ul className="space-y-3 text-sm" style={{ color: "var(--text-secondary)" }}>
-                  <li><strong style={{ color: "var(--text-primary)" }}>A Holistic Ecosystem:</strong> Skills build talent, talent designs platforms, platforms power ventures, and ventures attract institutional capital.</li>
-                  <li><strong style={{ color: "var(--text-primary)" }}>Proprietary AI Tech:</strong> Every venture we build launches with an unfair advantage by utilizing the pre-built architecture of the BlueSPACE Financial CLOUD.</li>
-                  <li><strong style={{ color: "var(--text-primary)" }}>Guaranteed Funding Pathways:</strong> Our managed FundMatrix program ensures our portfolio ventures bypass the traditional early-stage funding bottleneck.</li>
-                  <li><strong style={{ color: "var(--text-primary)" }}>Pan-African Scale:</strong> Using Ghana as a strategic launchpad, we build architectures engineered for rapid cross-border expansion.</li>
-                </ul>
+            </AnimatedSection>
+            <AnimatedSection delay={0.1}>
+              <div className="group relative overflow-hidden rounded-2xl border" style={{ borderColor: "var(--border)" }}>
+                <div className="relative h-48 overflow-hidden sm:h-52">
+                  <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80" alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent 30%, var(--bg-card) 100%)" }} />
+                </div>
+                <div className="relative -mt-16 p-6">
+                  <h3 className="mb-3 text-xl font-bold" style={{ color: "var(--text-primary)" }}>
+                    Why BIH-DEVS?
+                  </h3>
+                  <p className="mb-4 text-sm font-semibold" style={{ color: "var(--accent)" }}>
+                    The Venture Studio Advantage
+                  </p>
+                  <ul className="space-y-3 text-sm" style={{ color: "var(--text-secondary)" }}>
+                    <li><strong style={{ color: "var(--text-primary)" }}>A Holistic Ecosystem:</strong> Skills build talent, talent designs platforms, platforms power ventures, and ventures attract institutional capital.</li>
+                    <li><strong style={{ color: "var(--text-primary)" }}>Proprietary AI Tech:</strong> Every venture we build launches with an unfair advantage by utilizing the pre-built architecture of the BlueSPACE Financial CLOUD.</li>
+                    <li><strong style={{ color: "var(--text-primary)" }}>Guaranteed Funding Pathways:</strong> Our managed FundMatrix program ensures our portfolio ventures bypass the traditional early-stage funding bottleneck.</li>
+                    <li><strong style={{ color: "var(--text-primary)" }}>Pan-African Scale:</strong> Using Ghana as a strategic launchpad, we build architectures engineered for rapid cross-border expansion.</li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+          </div>
 
           {/* Team */}
           <div>
